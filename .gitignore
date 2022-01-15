@@ -55,4 +55,5 @@ macOS .DS_Store files
 .pnp.*
 
 # Frontity
+buildnode_modules
 build
