@@ -1,4 +1,4 @@
-import Theme from "@frontity/mars-theme-typescript/types";
+import Theme from "./packages/life/types";
 import WpSource from "@frontity/wp-source/types";
 import { Settings } from "frontity/types";
 

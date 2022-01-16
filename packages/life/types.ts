@@ -1,8 +1,8 @@
-import { Package, Action, MergePackages, Frontity } from "frontity/types";
 import { AutoPrefetch } from "@frontity/components/link/types";
 import Html2React from "@frontity/html2react/types";
 import Router from "@frontity/router/types";
 import Source from "@frontity/source/types";
+import { Action, Frontity, MergePackages, Package } from "frontity/types";
 
 /**
  * A Frontity starter theme designed to learn Frontity.
