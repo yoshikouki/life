@@ -1,6 +1,6 @@
 import WpSource from "@frontity/wp-source/types";
 import { Settings } from "frontity/types";
-import Theme from "./packages/life/types";
+import Theme from "life/types";
 
 const settings: Settings<Theme | WpSource> = {
   "name": "life",
