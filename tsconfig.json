@@ -21,7 +21,11 @@
     // Transpile JS as well.
     "allowJs": true,
     // Allows using the css prop in JSX components.
-    "types": ["@emotion/react/types/css-prop"]
+    "types": [
+      "@emotion/react/types/css-prop"
+    ]
   },
-  "include": ["packages/**/*"]
+  "include": [
+    "packages/**/*"
+  ]
 }

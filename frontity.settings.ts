@@ -1,6 +1,6 @@
-import { Settings } from "frontity/types";
-import WpSource from "@frontity/wp-source/types";
 import Theme from "@frontity/mars-theme-typescript/types";
+import WpSource from "@frontity/wp-source/types";
+import { Settings } from "frontity/types";
 
 const settings: Settings<Theme | WpSource> = {
   "name": "life",
@@ -8,8 +8,8 @@ const settings: Settings<Theme | WpSource> = {
     "frontity": {
       "url": "https://test.frontity.org",
       "title": "Test Frontity Blog",
-      "description": "WordPress installation for Frontity development"
-    }
+      "description": "WordPress installation for Frontity development",
+    },
   },
   "packages": [
     {
@@ -19,43 +19,43 @@ const settings: Settings<Theme | WpSource> = {
           "menu": [
             [
               "Home",
-              "/"
+              "/",
             ],
             [
               "Nature",
-              "/category/nature/"
+              "/category/nature/",
             ],
             [
               "Travel",
-              "/category/travel/"
+              "/category/travel/",
             ],
             [
               "Japan",
-              "/tag/japan/"
+              "/tag/japan/",
             ],
             [
               "About Us",
-              "/about-us/"
-            ]
+              "/about-us/",
+            ],
           ],
           "featured": {
             "showOnList": false,
-            "showOnPost": false
-          }
-        }
-      }
+            "showOnPost": false,
+          },
+        },
+      },
     },
     {
       "name": "@frontity/wp-source",
       "state": {
         "source": {
-          "url": "https://test.frontity.org"
-        }
-      }
+          "url": "https://test.frontity.org",
+        },
+      },
     },
     "@frontity/tiny-router",
-    "@frontity/html2react"
-  ]
+    "@frontity/html2react",
+  ],
 };
 
 export default settings;
