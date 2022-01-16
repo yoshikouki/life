@@ -22,7 +22,7 @@
     "@frontity/wp-source": "^1.11.7",
     "@frontity/tiny-router": "^1.4.4",
     "@frontity/html2react": "^1.7.0",
-    "@frontity/mars-theme-typescript": "./packages/mars-theme-typescript"
+    "life": "./packages/life"
   },
   "devDependencies": {
     "@types/react": "^17.0.38",
