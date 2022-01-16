@@ -1,19 +1,19 @@
-import Theme from "@frontity/mars-theme-typescript/types";
 import WpSource from "@frontity/wp-source/types";
 import { Settings } from "frontity/types";
+import Theme from "./packages/life/types";
 
 const settings: Settings<Theme | WpSource> = {
   "name": "life",
   "state": {
     "frontity": {
-      "url": "https://test.frontity.org",
-      "title": "Test Frontity Blog",
-      "description": "WordPress installation for Frontity development",
+      "url": "https://yoshikouki.com/",
+      "title": "yoshikouki",
+      "description": "yoshikouki というIDであちこち出没しています。",
     },
   },
   "packages": [
     {
-      "name": "@frontity/mars-theme-typescript",
+      "name": "life",
       "state": {
         "theme": {
           "menu": [
