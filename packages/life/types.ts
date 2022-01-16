@@ -11,7 +11,7 @@ interface MarsThemeTypeScript extends Package {
   /**
    * The name of this package.
    */
-  name: "@frontity/mars-theme-typescript";
+  name: "life";
 
   /**
    * Root components exposed by this package.
