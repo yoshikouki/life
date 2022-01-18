@@ -17,26 +17,9 @@ const settings: Settings<Theme | WpSource> = {
       "state": {
         "theme": {
           "menu": [
-            [
-              "Home",
-              "/",
-            ],
-            [
-              "Nature",
-              "/category/nature/",
-            ],
-            [
-              "Travel",
-              "/category/travel/",
-            ],
-            [
-              "Japan",
-              "/tag/japan/",
-            ],
-            [
-              "About Us",
-              "/about-us/",
-            ],
+            ["Home", "/"],
+            ["Works", "/works"],
+            ["Personality", "/personality"],
           ],
           "featured": {
             "showOnList": false,
@@ -49,7 +32,8 @@ const settings: Settings<Theme | WpSource> = {
       "name": "@frontity/wp-source",
       "state": {
         "source": {
-          "url": "https://test.frontity.org",
+          "url": "https://yoshikouki.main.jp",
+          "homepage": "/home",
         },
       },
     },
