@@ -17,26 +17,9 @@ const settings: Settings<Theme | WpSource> = {
       "state": {
         "theme": {
           "menu": [
-            [
-              "Home",
-              "/",
-            ],
-            [
-              "Nature",
-              "/category/nature/",
-            ],
-            [
-              "Travel",
-              "/category/travel/",
-            ],
-            [
-              "Japan",
-              "/tag/japan/",
-            ],
-            [
-              "About Us",
-              "/about-us/",
-            ],
+            ["Home", "/"],
+            ["Works", "/works"],
+            ["Personality", "/personality"],
           ],
           "featured": {
             "showOnList": false,
