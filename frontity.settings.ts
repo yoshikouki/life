@@ -50,6 +50,7 @@ const settings: Settings<Theme | WpSource> = {
       "state": {
         "source": {
           "url": "https://yoshikouki.main.jp",
+          "homepage": "/home",
         },
       },
     },
