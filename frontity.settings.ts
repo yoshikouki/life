@@ -18,8 +18,8 @@ const settings: Settings<MarsThemeTypeScript | WpSource> = {
         "theme": {
           "menu": [
             ["Home", "/"],
-            ["Works", "/works"],
-            ["Personality", "/personality"],
+            ["Works", "/works/"],
+            ["Personality", "/personality/"],
           ],
           "featured": {
             "showOnList": false,
