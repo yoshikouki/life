@@ -1,13 +1,13 @@
 import WpSource from "@frontity/wp-source/types";
 import { Settings } from "frontity/types";
-import Theme from "life/types";
+import MarsThemeTypeScript from "life/types";
 
-const settings: Settings<Theme | WpSource> = {
+const settings: Settings<MarsThemeTypeScript | WpSource> = {
   "name": "life",
   "state": {
     "frontity": {
       "url": "https://yoshikouki.com/",
-      "title": "yoshikouki",
+      "title": "yoshikouki.life",
       "description": "yoshikouki というIDであちこち出没しています。",
     },
   },
@@ -18,8 +18,8 @@ const settings: Settings<Theme | WpSource> = {
         "theme": {
           "menu": [
             ["Home", "/"],
-            ["Works", "/works"],
-            ["Personality", "/personality"],
+            ["Works", "/works/"],
+            ["Personality", "/personality/"],
           ],
           "featured": {
             "showOnList": false,
