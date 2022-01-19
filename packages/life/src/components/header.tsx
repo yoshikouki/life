@@ -1,8 +1,8 @@
 import { connect, styled, useConnect } from "frontity";
-import Link from "./link";
-import Nav from "./nav";
-import MobileMenu from "./menu";
 import { Packages } from "../../types";
+import Link from "./link";
+import MobileMenu from "./menu";
+import Nav from "./nav";
 
 /**
  * The header of the site, showing the title and description, and the nav bar.
@@ -17,10 +17,9 @@ const Header = () => {
         <StyledLink link="/">
           <Title>{state.frontity.title}</Title>
         </StyledLink>
-        <Description>{state.frontity.description}</Description>
         <MobileMenu />
+        <Nav />
       </Container>
-      <Nav />
     </>
   );
 };
@@ -31,21 +30,18 @@ const Container = styled.div`
   width: 848px;
   max-width: 100%;
   box-sizing: border-box;
-  padding: 24px;
+  padding: 1.3rem;
   color: #fff;
   display: flex;
-  flex-direction: column;
   justify-content: space-around;
+  align-items: center;
 `;
 
-const Title = styled.h2`
+const Title = styled.h1`
   margin: 0;
-  margin-bottom: 16px;
-`;
-
-const Description = styled.h4`
-  margin: 0;
-  color: rgba(255, 255, 255, 0.7);
+  height: 2rem;
+  vertical-align: middle;
+  display: inline
 `;
 
 const StyledLink = styled(Link)`
