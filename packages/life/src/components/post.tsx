@@ -55,6 +55,8 @@ const Post = ({ data }: PostProps): JSX.Element => {
   // Get the html2react component.
   const Html2React = libraries.html2react.Component;
 
+  const isNotMenuContent = !state.theme.menu.map(m => m[1]).includes(state.router.link)
+
   /**
    * Once the post has loaded in the DOM, prefetch both the
    * home posts and the list component so if the user visits
@@ -69,7 +71,7 @@ const Post = ({ data }: PostProps): JSX.Element => {
   return data.isReady ? (
     <Container>
       <div>
-        <Title dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
+        {isNotMenuContent && <Title dangerouslySetInnerHTML={{ __html: post.title.rendered }} />}
 
         {/* Only display author and date on posts */}
         {isPostEntity(post) && (
