@@ -1,8 +1,6 @@
-import WpSource from "@frontity/wp-source/types";
 import { Settings } from "frontity/types";
-import MarsThemeTypeScript from "life/types";
 
-const settings: Settings<MarsThemeTypeScript | WpSource> = {
+const settings: Settings = {
   "name": "life",
   "state": {
     "frontity": {
