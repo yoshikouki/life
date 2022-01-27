@@ -1,13 +1,15 @@
-import { Global, css, connect, styled, Head, useConnect } from "frontity";
 import Switch from "@frontity/components/switch";
-import { isArchive, isPostType, isError } from "@frontity/source";
+import { isArchive, isError, isPostType } from "@frontity/source";
+import { connect, css, Global, Head, styled, useConnect } from "frontity";
+import { Packages } from "../../types";
 import Header from "./header";
 import List from "./list";
-import Post from "./post";
 import Loading from "./loading";
-import Title from "./title";
 import PageError from "./page-error";
-import { Packages } from "../../types";
+import Post from "./post";
+import gutenbergStyle from "./styles/gutenberg/style.css";
+import gutenbergTheme from "./styles/gutenberg/theme.css";
+import Title from "./title";
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -25,11 +27,13 @@ const Theme = () => {
       <Title />
       <Head>
         <meta name="description" content={state.frontity.description} />
-        <html lang="en" />
+        <html lang="ja" />
       </Head>
 
-      {/* Add some global styles for the whole site, like body or a's. 
+      {/* Add some global styles for the whole site, like body or a's.
       Not classes here because we use CSS-in-JS. Only global HTML tags. */}
+      <Global styles={css(gutenbergStyle)} />
+      <Global styles={css(gutenbergTheme)} />
       <Global styles={globalStyles} />
 
       {/* Add the header of the site. */}
