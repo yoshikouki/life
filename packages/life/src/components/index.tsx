@@ -95,6 +95,26 @@ const globalStyles = css`
     line-height: 1.75rem;
     font-size: 1rem;
   }
+  ul, ol {
+    margin: 1rem 0;
+    padding: 0;
+    padding-left: 0.5rem;
+    li ol, li ul {
+      margin: 0.3rem 0 0.5rem;
+      padding-left: 0.5rem;
+    }
+  }
+  li {
+    padding-left: 1rem;
+    margin-bottom: 0.3rem;
+  }
+  ul li {
+    list-style: "-" outside;
+  }
+  ol {
+    margin-left: 1rem;
+    list-style-position: outside;
+  }
 `;
 
 const HeadContainer = styled.div`
