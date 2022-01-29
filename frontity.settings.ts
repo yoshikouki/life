@@ -5,7 +5,7 @@ const settings: Settings = {
   "state": {
     "frontity": {
       "url": "https://yoshikouki.com/",
-      "title": "yoshikouki.life",
+      "title": "LIFE",
       "description": "yoshikouki というIDであちこち出没しています。",
     },
   },
