@@ -65,6 +65,7 @@ const globalStyles = css`
     --black: #001f3f;
     --white: #ffffff;
     --bodycolor: #e0e0e0;
+    --link-color: #1f7ccc;
   }
   body {
     margin: 0;
@@ -74,17 +75,17 @@ const globalStyles = css`
       "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-feature-settings: "kern";
     -webkit-font-smoothing: antialiased;
-    font-color: var(--black);
+    color: var(--black);
   }
   html {
     height: -webkit-fill-available;
   }
   a{
-    font-color: var(--brand);
+    color: var(--link-color);
     text-decoration: none;
+
     &:hover {
-      font-color: var(--black);
-      text-decoration: none;
+      text-decoration: underline;
     }
   }
   h1, h2, h3, h4, h5, h6 {
@@ -93,6 +94,26 @@ const globalStyles = css`
   p {
     line-height: 1.75rem;
     font-size: 1rem;
+  }
+  ul, ol {
+    margin: 1rem 0;
+    padding: 0;
+    padding-left: 0.5rem;
+    li ol, li ul {
+      margin: 0.3rem 0 0.5rem;
+      padding-left: 0.5rem;
+    }
+  }
+  li {
+    padding-left: 1rem;
+    margin-bottom: 0.3rem;
+  }
+  ul li {
+    list-style: "-" outside;
+  }
+  ol {
+    margin-left: 1rem;
+    list-style-position: outside;
   }
 `;
 
