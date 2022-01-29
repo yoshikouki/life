@@ -3,7 +3,7 @@ import {
   isAttachmentEntity,
   isPageEntity
 } from "@frontity/source";
-import { PostTypeData, PostTypeEntity } from "@frontity/source/types";
+import { HomeData, PostTypeData, PostTypeEntity } from "@frontity/source/types";
 import { connect, styled, useConnect } from "frontity";
 import { useEffect } from "react";
 import { Packages } from "../../../types";
@@ -15,7 +15,12 @@ interface HomeProps {
   /**
    * Data element representing a URL in your frontity site.
    */
-  data: PostTypeData;
+  data: HomeData & Partial<PostTypeData>;
+
+  /**
+   * Whether to render this component.
+   */
+  when?: boolean;
 }
 
 /**
