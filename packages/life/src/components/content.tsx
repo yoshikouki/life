@@ -81,7 +81,7 @@ const Container = styled.div`
     font-weight: 400;
     line-height: 1.5;
     color: #495057;
-    background-color: #fff;
+    background-color: var(--white);
     background-clip: padding-box;
     border: 1px solid #ced4da;
     border-radius: 4px;
@@ -110,7 +110,7 @@ const Container = styled.div`
     font-size: 14px;
     line-height: 1.42857143;
     border-radius: 4px;
-    color: #fff;
+    color: var(--white);
     background-color: #1f38c5;
   }
 

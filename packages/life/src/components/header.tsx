@@ -31,7 +31,7 @@ const Container = styled.div`
   max-width: 100%;
   box-sizing: border-box;
   padding: 1.3rem;
-  color: #fff;
+  color: var(--white);
   display: flex;
   justify-content: space-around;
   align-items: center;

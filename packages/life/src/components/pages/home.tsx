@@ -104,7 +104,7 @@ const NeumorphismButton = styled(Link)`
   min-width: 16rem;
   min-height: 15rem;
   border-radius: 50px;
-  background-color: #e0e0e0;
+  background-color: var(--bodycolor);
   text-decoration: none;
   font-size: 3rem;
   text-align: center;
