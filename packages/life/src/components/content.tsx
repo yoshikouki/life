@@ -28,7 +28,6 @@ export default Content;
  * selectors to style that HTML.
  */
 const Container = styled.div`
-  color: rgba(12, 17, 43, 0.8);
   word-break: break-word;
 
   * {
@@ -64,11 +63,6 @@ const Container = styled.div`
     background-color: rgba(0, 0, 0, 0.1);
     border-left: 4px solid rgba(12, 17, 43);
     padding: 4px 16px;
-  }
-
-  a {
-    color: rgb(31, 56, 197);
-    text-decoration: underline;
   }
 
   /* Input fields styles */
