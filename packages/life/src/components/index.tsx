@@ -1,11 +1,12 @@
 import Switch from "@frontity/components/switch";
-import { isArchive, isError, isPostType } from "@frontity/source";
+import { isArchive, isError, isHome, isPostType } from "@frontity/source";
 import { connect, css, Global, Head, styled, useConnect } from "frontity";
 import { Packages } from "../../types";
 import Header from "./header";
 import List from "./list";
 import Loading from "./loading";
 import PageError from "./page-error";
+import Home from "./pages/home";
 import Post from "./post";
 import gutenbergStyle from "./styles/gutenberg/style.css";
 import gutenbergTheme from "./styles/gutenberg/theme.css";
@@ -32,9 +33,9 @@ const Theme = () => {
 
       {/* Add some global styles for the whole site, like body or a's.
       Not classes here because we use CSS-in-JS. Only global HTML tags. */}
+      <Global styles={globalStyles} />
       <Global styles={css(gutenbergStyle)} />
       <Global styles={css(gutenbergTheme)} />
-      <Global styles={globalStyles} />
 
       {/* Add the header of the site. */}
       <HeadContainer>
@@ -46,6 +47,7 @@ const Theme = () => {
       <Main>
         <Switch>
           <Loading when={data.isFetching} />
+          <Home when={isHome(data)}  data={isHome(data) && data} />
           <List when={isArchive(data)} data={isArchive(data) && data} />
           <Post when={isPostType(data)} data={isPostType(data) && data} />
           <PageError when={isError(data)} data={isError(data) && data} />
@@ -58,15 +60,39 @@ const Theme = () => {
 export default connect(Theme);
 
 const globalStyles = css`
+  :root {
+    --brand: #5B3BE8;
+    --black: #001f3f;
+    --white: #ffffff;
+    --bodycolor: #e0e0e0;
+  }
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    min-height: -webkit-fill-available;
+    background-color: var(--bodycolor);
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
       "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-feature-settings: "kern";
+    -webkit-font-smoothing: antialiased;
+    font-color: var(--black);
   }
-  a,
-  a:visited {
-    color: inherit;
+  html {
+    height: -webkit-fill-available;
+  }
+  a{
+    font-color: var(--brand);
     text-decoration: none;
+    &:hover {
+      font-color: var(--black);
+      text-decoration: none;
+    }
+  }
+  h1, h2, h3, h4, h5, h6 {
+    color:var(--black);
+  }
+  p {
+    line-height: 1.75rem;
+    font-size: 1rem;
   }
 `;
 
@@ -74,15 +100,9 @@ const HeadContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: #1f38c5;
 `;
 
 const Main = styled.div`
   display: flex;
   justify-content: center;
-  background-image: linear-gradient(
-    180deg,
-    rgba(66, 174, 228, 0.1),
-    rgba(66, 174, 228, 0)
-  );
 `;

@@ -28,7 +28,6 @@ export default Content;
  * selectors to style that HTML.
  */
 const Container = styled.div`
-  color: rgba(12, 17, 43, 0.8);
   word-break: break-word;
 
   * {
@@ -66,11 +65,6 @@ const Container = styled.div`
     padding: 4px 16px;
   }
 
-  a {
-    color: rgb(31, 56, 197);
-    text-decoration: underline;
-  }
-
   /* Input fields styles */
 
   input[type="text"],
@@ -83,11 +77,11 @@ const Container = styled.div`
   select {
     display: block;
     padding: 6px 12px;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
     color: #495057;
-    background-color: #fff;
+    background-color: var(--white);
     background-clip: padding-box;
     border: 1px solid #ced4da;
     border-radius: 4px;
@@ -113,10 +107,10 @@ const Container = styled.div`
     background-image: none;
     border: 1px solid #1f38c5;
     padding: 12px 36px;
-    font-size: 14px;
+    font-size: 0.8rem;
     line-height: 1.42857143;
     border-radius: 4px;
-    color: #fff;
+    color: var(--white);
     background-color: #1f38c5;
   }
 

@@ -51,8 +51,8 @@ const NavItem = styled.div`
   padding: 0;
   margin: 0;
   margin-left: 1rem;
-  color: #fff;
-  font-size: 0.9em;
+  color: var(--white);
+  font-size: 1.1em;
   box-sizing: border-box;
   flex-shrink: 0;
 
@@ -65,7 +65,7 @@ const NavItem = styled.div`
     border-bottom-color: transparent;
     /* Use for semantic approach to style the current link */
     &[aria-current="page"] {
-      border-bottom-color: #fff;
+      border-bottom-color: var(--white);
     }
   }
 `;

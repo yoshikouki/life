@@ -11,12 +11,16 @@ import Nav from "./nav";
  */
 const Header = () => {
   const { state } = useConnect<Packages>();
+  const { menu, isMobileMenuOpen } = state.theme;
+
   return (
     <>
       <Container>
-        <StyledLink link="/">
-          <Title>{state.frontity.title}</Title>
-        </StyledLink>
+        {!isMobileMenuOpen && (
+          <StyledLink link="/">
+            <Title>{state.frontity.title}</Title>
+          </StyledLink>
+        )}
         <MobileMenu />
         <Nav />
       </Container>
@@ -30,8 +34,8 @@ const Container = styled.div`
   width: 848px;
   max-width: 100%;
   box-sizing: border-box;
-  padding: 1.3rem;
-  color: #fff;
+  padding: 24px;
+  color: var(--white);
   display: flex;
   justify-content: space-around;
   align-items: center;
