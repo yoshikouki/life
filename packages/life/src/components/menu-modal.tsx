@@ -14,7 +14,7 @@ const MenuModal = ({ ...props }) => {
   const isThereLinks = menu?.length > 0;
 
   return (
-    <div {...props}>
+    <MenuWrapper {...props}>
       {state.frontity.mode !== "amp" && <MenuOverlay />}
       <MenuContent as="nav">
         {isThereLinks &&
@@ -28,12 +28,17 @@ const MenuModal = ({ ...props }) => {
             </MenuLink>
           ))}
       </MenuContent>
-    </div>
+    </MenuWrapper>
   );
 };
 
+const MenuWrapper = styled.div`
+  width: 100%;
+  padding: 64px 0;
+`;
+
 const MenuOverlay = styled.div`
-  background-color: #1f38c5;
+  background-color: var(--bodycolor);
   width: 100vw;
   height: 100vh;
   overflow: hidden auto;
@@ -46,15 +51,17 @@ const MenuOverlay = styled.div`
 const MenuContent = styled.div`
   z-index: 3;
   position: relative;
+  width: 100%;
 `;
 
 const MenuLink = styled(Link)`
-  width: 100%;
   display: inline-block;
-  outline: 0;
-  font-size: 20px;
-  text-align: center;
   padding: 1.2rem 0;
+  width: 100%;
+  text-align: center;
+  outline: 0;
+  font-size: 1.1rem;
+  color: var(--brand);
 
   &:hover,
   &:focus {
@@ -62,8 +69,7 @@ const MenuLink = styled(Link)`
   }
   /* styles for active link */
   &[aria-current="page"] {
-    color: yellow;
-    font-weight: bold;
+    color: var(--black);
   }
 `;
 

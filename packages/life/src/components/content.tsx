@@ -77,7 +77,7 @@ const Container = styled.div`
   select {
     display: block;
     padding: 6px 12px;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
     color: #495057;
@@ -107,7 +107,7 @@ const Container = styled.div`
     background-image: none;
     border: 1px solid #1f38c5;
     padding: 12px 36px;
-    font-size: 14px;
+    font-size: 0.8rem;
     line-height: 1.42857143;
     border-radius: 4px;
     color: var(--white);
