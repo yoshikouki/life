@@ -115,6 +115,37 @@ const Container = styled.div`
   width: 800px;
   margin: 0;
   padding: 24px;
+
+  ul, ol {
+    margin: 1rem 0;
+    padding: 0;
+  }
+  li ol, li ul {
+    margin: 0;
+    padding-left: 0.5rem;
+    & > li {
+      border-bottom: none;
+      &:first-child {
+        margin-top: 1rem;
+      }
+    }
+  }
+  li {
+    padding: 1rem 0 1rem 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    list-style: none inside;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.03);
+    }
+    &:first-child {
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  th, td {
+    padding: 1rem;
+  }
 `;
 
 const Title = styled.h1`

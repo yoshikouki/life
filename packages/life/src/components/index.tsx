@@ -91,29 +91,12 @@ const globalStyles = css`
   h1, h2, h3, h4, h5, h6 {
     color:var(--black);
   }
+  h2 {
+
+  }
   p {
     line-height: 1.75rem;
     font-size: 1rem;
-  }
-  ul, ol {
-    margin: 1rem 0;
-    padding: 0;
-    padding-left: 0.5rem;
-    li ol, li ul {
-      margin: 0.3rem 0 0.5rem;
-      padding-left: 0.5rem;
-    }
-  }
-  li {
-    padding-left: 1rem;
-    margin-bottom: 0.3rem;
-  }
-  ul li {
-    list-style: "-" outside;
-  }
-  ol {
-    margin-left: 1rem;
-    list-style-position: outside;
   }
 `;
 
