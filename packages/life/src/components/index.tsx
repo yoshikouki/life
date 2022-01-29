@@ -65,6 +65,7 @@ const globalStyles = css`
     --black: #001f3f;
     --white: #ffffff;
     --bodycolor: #e0e0e0;
+    --link-color: #1f7ccc;
   }
   body {
     margin: 0;
@@ -74,17 +75,17 @@ const globalStyles = css`
       "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-feature-settings: "kern";
     -webkit-font-smoothing: antialiased;
-    font-color: var(--black);
+    color: var(--black);
   }
   html {
     height: -webkit-fill-available;
   }
   a{
-    font-color: var(--brand);
+    color: var(--link-color);
     text-decoration: none;
+
     &:hover {
-      font-color: var(--black);
-      text-decoration: none;
+      text-decoration: underline;
     }
   }
   h1, h2, h3, h4, h5, h6 {

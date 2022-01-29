@@ -20,9 +20,9 @@ const Nav = (): JSX.Element => {
         return (
           <NavItem key={name}>
             {/* If link url is the current page, add `aria-current` for a11y */}
-            <Link link={link} aria-current={isCurrentPage ? "page" : undefined}>
+            <StyledLink link={link} aria-current={isCurrentPage ? "page" : undefined}>
               {name}
-            </Link>
+            </StyledLink>
           </NavItem>
         );
       })}
@@ -51,21 +51,28 @@ const NavItem = styled.div`
   padding: 0;
   margin: 0;
   margin-left: 1rem;
-  color: var(--white);
   font-size: 1.1em;
   box-sizing: border-box;
   flex-shrink: 0;
+`;
 
-  & > a {
-    display: flex;
-    flex-direction: column;
-    padding: .625rem;
-    text-align: center;
-    border-bottom: 1px solid;
-    border-bottom-color: transparent;
-    /* Use for semantic approach to style the current link */
-    &[aria-current="page"] {
-      border-bottom-color: var(--white);
-    }
+const StyledLink = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  padding: .625rem;
+  text-align: center;
+  border-bottom: 1px solid;
+  border-bottom-color: transparent;
+  color: var(--black);
+  transition: color 0.5s;
+
+  &:hover{
+    color: var(--link-color);
+    transition: color 0.3s;
+    text-decoration: none;
+  }
+  /* Use for semantic approach to style the current link */
+  &[aria-current="page"] {
+    border-bottom-color: var(--white);
   }
 `;

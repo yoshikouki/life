@@ -1,7 +1,7 @@
-import { styled, connect, useConnect, Global, Head } from "frontity";
+import { connect, Global, Head, styled, useConnect } from "frontity";
+import { Packages } from "../../types";
 import { CloseIcon, HamburgerIcon } from "./menu-icon";
 import MenuModal from "./menu-modal";
-import { Packages } from "../../types";
 
 /**
  * The menu that should be displayed on mobile devices displaying links to
@@ -72,7 +72,7 @@ const MenuToggle = styled.button`
   top: 24px;
   background: transparent;
   border: 0;
-  color: white;
+  color: var(--white);
   z-index: 5;
   height: 40px;
   width: 40px;

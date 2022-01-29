@@ -61,7 +61,7 @@ const MenuLink = styled(Link)`
   text-align: center;
   outline: 0;
   font-size: 1.1rem;
-  color: var(--brand);
+  color: var(--link-color);
 
   &:hover,
   &:focus {
