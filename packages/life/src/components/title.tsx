@@ -1,5 +1,5 @@
-import { Head, connect, decode, useConnect } from "frontity";
-import { isTerm, isAuthor, isPostType, isError } from "@frontity/source";
+import { isAuthor, isError, isHome, isPostType, isTerm } from "@frontity/source";
+import { connect, decode, Head, useConnect } from "frontity";
 import { Packages } from "../../types";
 
 /**
@@ -15,7 +15,9 @@ const Title = (): JSX.Element => {
   // Set the default title.
   let title = state.frontity.title;
 
-  if (isTerm(data)) {
+  if (isHome(data)) {
+    title = `${state.frontity.title} - yoshikouki`;
+  } else if (isTerm(data)) {
     // Add titles to taxonomies, like "Category: Nature - Blog Name" or "Tag: Japan - Blog Name".
     // 1. Get the taxonomy entity from the state to get its taxonomy term and name.
     const { taxonomy, name } = state.source[data.taxonomy][data.id];
