@@ -6,6 +6,7 @@ import Header from "./header";
 import List from "./list";
 import Loading from "./loading";
 import PageError from "./page-error";
+import Home from "./pages/home";
 import Post from "./post";
 import gutenbergStyle from "./styles/gutenberg/style.css";
 import gutenbergTheme from "./styles/gutenberg/theme.css";
@@ -46,6 +47,7 @@ const Theme = () => {
       <Main>
         <Switch>
           <Loading when={data.isFetching} />
+          <Home when={isHome(data)}  data={isHome(data) && data} />
           <List when={isArchive(data)} data={isArchive(data) && data} />
           <Post when={isPostType(data)} data={isPostType(data) && data} />
           <PageError when={isError(data)} data={isError(data) && data} />
