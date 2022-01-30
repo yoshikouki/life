@@ -63,6 +63,8 @@ const globalStyles = css`
   :root {
     --brand: #5B3BE8;
     --black: #001f3f;
+    --darkgray: #56617a;
+    --lightgray: #a8acbb;
     --white: #ffffff;
     --bodycolor: #e0e0e0;
     --link-color: #1f7ccc;
@@ -104,6 +106,10 @@ const HeadContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  background: linear-gradient(var(--bodycolor), rgba(224, 224, 224, 0.8));
 `;
 
 const Main = styled.div`
