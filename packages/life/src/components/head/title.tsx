@@ -1,6 +1,6 @@
 import { isAuthor, isError, isHome, isPostType, isTerm } from "@frontity/source";
 import { connect, decode, Head, useConnect } from "frontity";
-import { Packages } from "../../types";
+import { Packages } from "../../../types";
 
 /**
  * Populate the `<title>` tag with different titles, based on the type of

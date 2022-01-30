@@ -10,7 +10,7 @@ import Home from "./pages/home";
 import Post from "./post";
 import gutenbergStyle from "./styles/gutenberg/style.css";
 import gutenbergTheme from "./styles/gutenberg/theme.css";
-import Title from "./title";
+import Title from "./head/title";
 
 /**
  * Theme is the root React component of our theme. The one we will export
