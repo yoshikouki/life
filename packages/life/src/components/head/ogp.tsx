@@ -51,7 +51,7 @@ const Title = ({ data }: {data: Data}): JSX.Element => {
       <meta property="og:description" content={description} />
       <meta property="og:image" content="https://www.gravatar.com/avatar/a6c581d156d86d79ea83cbbccdfebbe0?s=800&r=g" />
       <meta name="twitter:card" content="summary" />
-      <meta name="twitter:site" content="@yoshikouki_">
+      <meta name="twitter:site" content="@yoshikouki_" />
     </Head>
   );
 };
