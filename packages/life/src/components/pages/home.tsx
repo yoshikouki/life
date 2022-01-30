@@ -68,11 +68,13 @@ const Home = connect(({ data }: HomeProps): JSX.Element => {
 
       <ButtonList>
         {state.theme.menu.map(([name, link]) => {
-          return (link !== state.router.link && <ButtonListItem>
-            <NeumorphismButton link={link}>
-              {name}
-            </NeumorphismButton>
-          </ButtonListItem>)
+          return (link === state.router.link ? null : (
+            <ButtonListItem>
+              <NeumorphismButton link={link}>
+                {name}
+              </NeumorphismButton>
+            </ButtonListItem>
+          ));
         })}
       </ButtonList>
     </Container>
@@ -103,17 +105,19 @@ const NeumorphismButton = styled(Link)`
   width: calc(100%px);
   min-width: 16rem;
   min-height: 15rem;
-  border-radius: 50px;
-  background-color: var(--bodycolor);
   text-decoration: none;
   font-size: 3rem;
   text-align: center;
+  border-radius: 24px;
+  box-shadow: 24px 24px 48px #bebebe, -24px -24px 48px #ffffff;
+  -webkit-box-shadow: 24px 24px 48px #bebebe, -24px -24px 48px #ffffff;
+  background-color: var(--bodycolor);
+  transition: all .5s;
 
-  box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
-  -webkit-box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
-  a {
+  &:hover {
+    box-shadow: 12px 12px 24px #bebebe, -12px -12px 24px #ffffff;
+    -webkit-box-shadow: 12px 12px 24px #bebebe, -12px -12px 24px #ffffff;
     text-decoration: none;
-    color: var(--black);
-    margin-right: 100;
+    color: var(--link-color);
   }
 `;

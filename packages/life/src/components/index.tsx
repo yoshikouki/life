@@ -63,6 +63,8 @@ const globalStyles = css`
   :root {
     --brand: #5B3BE8;
     --black: #001f3f;
+    --darkgray: #56617a;
+    --lightgray: #a8acbb;
     --white: #ffffff;
     --bodycolor: #e0e0e0;
     --link-color: #1f7ccc;
