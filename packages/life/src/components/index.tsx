@@ -2,6 +2,8 @@ import Switch from "@frontity/components/switch";
 import { isArchive, isError, isHome, isPostType } from "@frontity/source";
 import { connect, css, Global, Head, styled, useConnect } from "frontity";
 import { Packages } from "../../types";
+import Ogp from "./head/ogp";
+import Title from "./head/title";
 import Header from "./header";
 import List from "./list";
 import Loading from "./loading";
@@ -10,7 +12,6 @@ import Home from "./pages/home";
 import Post from "./post";
 import gutenbergStyle from "./styles/gutenberg/style.css";
 import gutenbergTheme from "./styles/gutenberg/theme.css";
-import Title from "./title";
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -26,6 +27,7 @@ const Theme = () => {
     <>
       {/* Add some metatags to the <head> of the HTML. */}
       <Title />
+      <Ogp data={data} />
       <Head>
         <meta name="description" content={state.frontity.description} />
         <html lang="ja" />
