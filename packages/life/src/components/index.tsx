@@ -106,6 +106,10 @@ const HeadContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  background: linear-gradient(var(--bodycolor), rgba(224, 224, 224, 0.8));
 `;
 
 const Main = styled.div`
