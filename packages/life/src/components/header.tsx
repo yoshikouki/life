@@ -50,4 +50,7 @@ const Title = styled.h1`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
 `;

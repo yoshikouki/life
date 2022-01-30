@@ -122,7 +122,6 @@ const Container = styled.div`
   }
   li ol, li ul {
     margin: 0;
-    padding-left: 0.5rem;
     & > li {
       border-bottom: none;
       &:first-child {
