@@ -14,7 +14,7 @@ export const cssVarsThemeOptions: CssVarsThemeOptions = {
     light: {
       palette: {
         background: {
-          defaultChannel: grey[100], // #f5f5f5
+          default: grey[100], // #f5f5f5
         },
         text: {
           primary: grey[800], // #424242
@@ -25,7 +25,7 @@ export const cssVarsThemeOptions: CssVarsThemeOptions = {
     dark: {
       palette: {
         background: {
-          default: "var(--mui-palette-common-black)",
+          default: "#000",
           paper: "#40221B",
         },
         text: {
@@ -89,11 +89,11 @@ export const cssVarsThemeOptions: CssVarsThemeOptions = {
     MuiCssBaseline: {
       styleOverrides: {
         a: {
-          // color: "inherit",
-          // textDecoration: "none",
-          // "&:hover": {
-          //   textDecoration: "underline",
-          // },
+          color: "inherit",
+          textDecoration: "none",
+          "&:hover": {
+            textDecoration: "underline",
+          },
         },
       },
     },
