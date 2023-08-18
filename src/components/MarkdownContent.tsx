@@ -1,6 +1,6 @@
 import { fetchMarkdown } from "@/lib/fetch-markdown";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import MDXRegistry from "./MDXRegistry";
+import { components } from "./MarkdownComponents";
 
 interface Props {
   path: string;
@@ -8,11 +8,7 @@ interface Props {
 
 const MarkdownContent = async ({ path }: Props) => {
   const markdown = await fetchMarkdown(path);
-  return (
-    <MDXRegistry>
-      <MDXRemote source={markdown} />
-    </MDXRegistry>
-  );
+  return <MDXRemote source={markdown} components={components} />;
 };
 
 export default MarkdownContent;

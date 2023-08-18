@@ -1,4 +1,5 @@
-const baseURL = "https://raw.githubusercontent.com/yoshikouki/yoshikouki/main/";
+export const baseURL =
+  "https://raw.githubusercontent.com/yoshikouki/yoshikouki/main/";
 const replaceRegExp = new RegExp(
   "https://github.com/yoshikouki/yoshikouki/tree/main/",
   "g"

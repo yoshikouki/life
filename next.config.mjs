@@ -6,6 +6,18 @@ import remarkGfm from "remark-gfm";
 const nextConfig = {
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
 
+  // TODO: Correction for bad manners.
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "raw.githubusercontent.com",
+        port: "",
+        pathname: "/yoshikouki/yoshikouki/main/**",
+      },
+    ],
+  },
+
   experimental: {
     mdxRs: false,
   },
