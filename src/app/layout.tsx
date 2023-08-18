@@ -1,11 +1,11 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { CssBaseline } from "@mui/material";
 import { Analytics } from "@vercel/analytics/react";
-import { font } from './theme';
-import ThemeProvider from './ThemeProvider';
-import { CssBaseline } from '@mui/material';
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import ThemeProvider from "./ThemeProvider";
+import { font } from "./theme";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "yoshikouki",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="ja">

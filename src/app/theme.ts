@@ -1,4 +1,4 @@
-import { grey, red } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 import { type CssVarsThemeOptions } from "@mui/material/styles";
 import { M_PLUS_Rounded_1c } from "next/font/google";
 

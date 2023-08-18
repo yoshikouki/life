@@ -4,7 +4,7 @@ const replaceRegExp = new RegExp(
   "g"
 );
 
-export const fetchMarkdown = async (fileName: string = "") => {
+export const fetchMarkdown = async (fileName = "") => {
   const path = fileName ? fileName + "/README.md" : "README.md";
   const res = await fetch(`${baseURL}${path}`);
   const rowMarkdown = await res.text();
