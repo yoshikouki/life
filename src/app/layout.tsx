@@ -1,4 +1,4 @@
-import { CssBaseline } from "@mui/material";
+import { Container, CssBaseline } from "@mui/material";
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={font.className}>
         <ThemeProvider>
           <CssBaseline />
-          {children}
+          <Container maxWidth="sm">{children}</Container>
         </ThemeProvider>
         <Analytics />
       </body>

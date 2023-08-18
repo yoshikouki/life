@@ -39,8 +39,6 @@ export const cssVarsThemeOptions: CssVarsThemeOptions = {
   typography: {
     allVariants: {
       fontFamily: font.style.fontFamily,
-      overflow: "hidden",
-      textOverflow: "ellipsis",
     },
     h1: {
       fontSize: "2rem",
