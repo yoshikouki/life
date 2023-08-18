@@ -1,7 +1,9 @@
-import { fetchMarkdown } from "@/lib/fetch-markdown";
-import { MDXRemote } from "next-mdx-remote/rsc";
+import MarkdownContent from "@/components/MarkdownContent";
 
-export default async function Home() {
-  const markdown = await fetchMarkdown();
-  return <MDXRemote source={markdown} />;
+export default async function Page({
+  params: { slug },
+}: {
+  params: { slug: string[] };
+}) {
+  return <MarkdownContent path={"/"} />;
 }
