@@ -43,10 +43,17 @@ export const cssVarsThemeOptions: CssVarsThemeOptions = {
     h1: {
       fontSize: "2rem",
       fontWeight: 900,
+      mt: 2,
     },
     h2: {
       fontSize: "1.5rem",
       fontWeight: 900,
+      mt: 2,
+    },
+    h3: {
+      fontSize: "1.2rem",
+      fontWeight: 900,
+      mt: 2,
     },
     button: {
       textTransform: "none",
@@ -87,7 +94,8 @@ export const cssVarsThemeOptions: CssVarsThemeOptions = {
     MuiCssBaseline: {
       styleOverrides: {
         a: {
-          color: "inherit",
+          color: "#58a6ff",
+          textUnderlineOffset: "0.2em",
           textDecoration: "none",
           "&:hover": {
             textDecoration: "underline",
