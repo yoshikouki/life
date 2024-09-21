@@ -1,101 +1,144 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Header } from "./header";
+
+const contents = [
+  {
+    name: "Personality",
+    url: "https://github.com/yoshikouki/yoshikouki/wiki/Personality-%E4%BA%BA%E3%81%A8%E3%81%AA%E3%82%8A",
+  },
+  {
+    name: "Curriculum Vitae",
+    url: "https://github.com/yoshikouki/yoshikouki/wiki/Curriculum-Vitae-%E8%81%B7%E5%8B%99%E7%B5%8C%E6%AD%B4%E6%9B%B8",
+  },
+  {
+    name: "Interests Profile",
+    url: "https://github.com/yoshikouki/yoshikouki/wiki/Interests-Profile-%E8%88%88%E5%91%B3%E5%88%86%E9%87%8E",
+  },
+  {
+    name: "Inputs",
+    url: "https://github.com/yoshikouki/yoshikouki/blob/main/Inputs.md",
+  },
+];
+
+const work = [
+  {
+    name: "WEB+DB PRESS Vol.130「作って学ぶWeb3」",
+    url: "https://gihyo.jp/magazine/wdpress/archive/2022/vol130",
+  },
+];
+
+const sns = [
+  {
+    name: "Twitter",
+    url: "https://twitter.com/yoshikouki_",
+  },
+  {
+    name: "note",
+    url: "https://note.com/yoshikouki",
+  },
+  {
+    name: "Facebook",
+    url: "https://www.facebook.com/yoshikoukii/",
+  },
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/yoshikouki/",
+  },
+];
+
+const otherLinks = [
+  {
+    name: "GitHub",
+    url: "https://github.com/yoshikouki",
+  },
+  {
+    name: "connpass",
+    url: "https://connpass.com/user/yoshikouki/",
+  },
+  {
+    name: "Speaker Deck",
+    url: "https://speakerdeck.com/yoshikouki",
+  },
+  {
+    name: "Zenn",
+    url: "https://zenn.dev/yoshikouki",
+  },
+  {
+    name: "Qiita",
+    url: "https://qiita.com/yoshikouki",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
-      <main className="row-start-2 flex flex-col items-center gap-8 sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-center font-[family-name:var(--font-geist-mono)] text-sm sm:text-left">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="rounded bg-black/[.05] px-1 py-0.5 font-semibold dark:bg-white/[.06]">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      <Header />
 
-        <div className="flex flex-col items-center gap-4 sm:flex-row">
-          <a
-            className="flex h-10 items-center justify-center gap-2 rounded-full border border-transparent border-solid bg-foreground px-4 text-background text-sm transition-colors hover:bg-[#383838] sm:h-12 sm:px-5 sm:text-base dark:hover:bg-[#ccc]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="flex h-10 items-center justify-center rounded-full border border-black/[.08] border-solid px-4 text-sm transition-colors hover:border-transparent hover:bg-[#f2f2f2] sm:h-12 sm:min-w-44 sm:px-5 sm:text-base dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+      <main className="flex flex-col items-start justify-items-center gap-16 pt-28">
+        <section className="flex max-w-sm flex-col gap-8">
+          <h2 className="px-4 font-black text-6xl">Contents</h2>
+          <div className="grid grid-cols-1 gap-4">
+            {contents.map((content) => (
+              <Link
+                key={content.url}
+                href={content.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="px-4 text-lg">{content.name}</div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="flex max-w-sm flex-col gap-8">
+          <h2 className="px-4 font-black text-6xl">Work</h2>
+          <div className="grid grid-cols-1 gap-4">
+            {work.map((sns) => (
+              <Link
+                key={sns.url}
+                href={sns.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="px-4 text-lg">{sns.name}</div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="flex max-w-sm flex-col gap-8">
+          <h2 className="px-4 font-black text-6xl">SNS</h2>
+          <div className="grid grid-cols-1 gap-4">
+            {sns.map((sns) => (
+              <Link
+                key={sns.url}
+                href={sns.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="px-4 text-lg">{sns.name}</div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="flex max-w-sm flex-col gap-8">
+          <h2 className="px-4 font-black text-6xl">Other Link</h2>
+          <div className="grid grid-cols-1 gap-4">
+            {otherLinks.map((other) => (
+              <Link
+                key={other.url}
+                href={other.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="px-4 text-lg">{other.name}</div>
+              </Link>
+            ))}
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex flex-wrap items-center justify-center gap-6">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    </>
   );
 }
