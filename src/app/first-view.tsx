@@ -1,12 +1,11 @@
 import * as motion from "framer-motion/client";
+import { FirstViewOverlay } from "./first-view-overlay";
 
 export const FirstView = () => {
   return (
-    <motion.div
+    <FirstViewOverlay
       initial={{ opacity: 1 }}
-      animate={{
-        opacity: 0,
-      }}
+      animate={{ opacity: 0 }}
       transition={{
         delay: 2,
         duration: 0.5,
@@ -43,7 +42,7 @@ export const FirstView = () => {
           transition={{
             duration: 0.5,
             ease: "anticipate",
-            repeat: Number.POSITIVE_INFINITY,
+            repeat: 5,
             repeatType: "mirror",
           }}
           style={{
@@ -54,6 +53,6 @@ export const FirstView = () => {
           }}
         />
       </div>
-    </motion.div>
+    </FirstViewOverlay>
   );
 };
