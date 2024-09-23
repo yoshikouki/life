@@ -10,17 +10,17 @@ export const Header = () => {
   const translateY = useTransform(scrollY, [0, 400], ["-50%", "0%"], {
     ease: easeInOut,
   });
-  const left = useTransform(scrollY, [400, 900], ["50%", "0%"], {
+  const left = useTransform(scrollY, [400, 700], ["50%", "0%"], {
     ease: easeInOut,
   });
-  const translateX = useTransform(scrollY, [400, 900], ["-50%", "0%"], {
+  const translateX = useTransform(scrollY, [400, 700], ["-50%", "0%"], {
     ease: easeInOut,
   });
 
   return (
     <>
-      <header className="pointer-events-none fixed top-0 z-50 w-full touch-none px-4 py-4">
-        <div className="relative h-svh max-h-[1024px] min-h-20 w-full">
+      <header className="pointer-events-none fixed top-0 z-50 flex w-full touch-none justify-center px-4 py-4">
+        <div className="relative h-svh max-h-[1024px] min-h-20 w-full w-full max-w-sm">
           <motion.div
             style={{
               position: "absolute",
