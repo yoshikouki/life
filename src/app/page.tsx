@@ -1,5 +1,5 @@
 import { SlideUp } from "@/components/animattion/slide-up";
-import { UnmaskRight } from "@/components/animattion/unmask-right";
+import { Typing } from "@/components/animattion/typing";
 import Link from "next/link";
 import { Header } from "./header";
 
@@ -78,9 +78,9 @@ export default function Home() {
 
       <main className="flex flex-col items-center justify-items-center gap-16 pt-28">
         <section className="flex w-full max-w-sm flex-col gap-8">
-          <UnmaskRight>
-            <h2 className="px-4 font-black text-6xl">Contents</h2>
-          </UnmaskRight>
+          <h2 className="px-4 font-black text-6xl">
+            <Typing className="h-14">Contents</Typing>
+          </h2>
           <div className="grid grid-cols-1 gap-4">
             {contents.map((content) => (
               <SlideUp key={content.url}>
@@ -97,9 +97,9 @@ export default function Home() {
         </section>
 
         <section className="flex w-full max-w-sm flex-col gap-8">
-          <UnmaskRight>
-            <h2 className="px-4 font-black text-6xl">Work</h2>
-          </UnmaskRight>
+          <h2 className="px-4 font-black text-6xl">
+            <Typing className="h-14">Work</Typing>
+          </h2>
           <div className="grid grid-cols-1 gap-4">
             {work.map((sns) => (
               <SlideUp key={sns.url}>
@@ -112,9 +112,9 @@ export default function Home() {
         </section>
 
         <section className="flex w-full max-w-sm flex-col gap-8">
-          <UnmaskRight>
-            <h2 className="px-4 font-black text-6xl">SNS</h2>
-          </UnmaskRight>
+          <h2 className="px-4 font-black text-6xl">
+            <Typing className="h-14">SNS</Typing>
+          </h2>
           <div className="grid grid-cols-1 gap-4">
             {sns.map((sns) => (
               <SlideUp key={sns.url}>
@@ -132,9 +132,9 @@ export default function Home() {
         </section>
 
         <section className="flex w-full max-w-sm flex-col gap-8">
-          <UnmaskRight>
-            <h2 className="px-4 font-black text-6xl">Other Link</h2>
-          </UnmaskRight>
+          <h2 className="px-4 font-black text-6xl">
+            <Typing className="h-14">Other Link</Typing>
+          </h2>
           <div className="grid grid-cols-1 gap-4">
             {otherLinks.map((other) => (
               <SlideUp key={other.url}>
