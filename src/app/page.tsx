@@ -1,3 +1,5 @@
+import { SlideUp } from "@/components/animattion/slide-up";
+import { UnmaskRight } from "@/components/animattion/unmask-right";
 import Link from "next/link";
 import { Header } from "./header";
 
@@ -74,67 +76,77 @@ export default function Home() {
     <>
       <Header />
 
-      <main className="flex flex-col items-start justify-items-center gap-16 pt-28">
-        <section className="flex max-w-sm flex-col gap-8">
-          <h2 className="px-4 font-black text-6xl">Contents</h2>
+      <main className="flex flex-col items-center justify-items-center gap-16 pt-28">
+        <section className="flex w-full max-w-sm flex-col gap-8">
+          <UnmaskRight>
+            <h2 className="px-4 font-black text-6xl">Contents</h2>
+          </UnmaskRight>
           <div className="grid grid-cols-1 gap-4">
             {contents.map((content) => (
-              <Link
-                key={content.url}
-                href={content.url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div className="px-4 text-lg">{content.name}</div>
-              </Link>
+              <SlideUp key={content.url}>
+                <Link
+                  href={content.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div className="px-4 text-lg">{content.name}</div>
+                </Link>
+              </SlideUp>
             ))}
           </div>
         </section>
 
-        <section className="flex max-w-sm flex-col gap-8">
-          <h2 className="px-4 font-black text-6xl">Work</h2>
+        <section className="flex w-full max-w-sm flex-col gap-8">
+          <UnmaskRight>
+            <h2 className="px-4 font-black text-6xl">Work</h2>
+          </UnmaskRight>
           <div className="grid grid-cols-1 gap-4">
             {work.map((sns) => (
-              <Link
-                key={sns.url}
-                href={sns.url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div className="px-4 text-lg">{sns.name}</div>
-              </Link>
+              <SlideUp key={sns.url}>
+                <Link href={sns.url} target="_blank" rel="noopener noreferrer">
+                  <div className="px-4 text-lg">{sns.name}</div>
+                </Link>
+              </SlideUp>
             ))}
           </div>
         </section>
 
-        <section className="flex max-w-sm flex-col gap-8">
-          <h2 className="px-4 font-black text-6xl">SNS</h2>
+        <section className="flex w-full max-w-sm flex-col gap-8">
+          <UnmaskRight>
+            <h2 className="px-4 font-black text-6xl">SNS</h2>
+          </UnmaskRight>
           <div className="grid grid-cols-1 gap-4">
             {sns.map((sns) => (
-              <Link
-                key={sns.url}
-                href={sns.url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div className="px-4 text-lg">{sns.name}</div>
-              </Link>
+              <SlideUp key={sns.url}>
+                <Link
+                  key={sns.url}
+                  href={sns.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div className="px-4 text-lg">{sns.name}</div>
+                </Link>
+              </SlideUp>
             ))}
           </div>
         </section>
 
-        <section className="flex max-w-sm flex-col gap-8">
-          <h2 className="px-4 font-black text-6xl">Other Link</h2>
+        <section className="flex w-full max-w-sm flex-col gap-8">
+          <UnmaskRight>
+            <h2 className="px-4 font-black text-6xl">Other Link</h2>
+          </UnmaskRight>
           <div className="grid grid-cols-1 gap-4">
             {otherLinks.map((other) => (
-              <Link
-                key={other.url}
-                href={other.url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div className="px-4 text-lg">{other.name}</div>
-              </Link>
+              <SlideUp key={other.url}>
+                <Link
+                  key={other.url}
+                  href={other.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div className="px-4 text-lg">{other.name}</div>
+                </Link>
+              </SlideUp>
             ))}
           </div>
         </section>
