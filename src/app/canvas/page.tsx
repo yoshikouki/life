@@ -1,13 +1,16 @@
 import { SlideUp } from "@/components/animattion/slide-up";
 import { Typing } from "@/components/animattion/typing";
+import Link from "next/link";
 
 export default function CanvasPage() {
   return (
     <>
       <header className="flex items-center p-4">
-        <h1>
-          <Typing className="h-4">Canvas</Typing>
-        </h1>
+        <Link href="/">
+          <h1>
+            <Typing className="h-4">Canvas</Typing>
+          </h1>
+        </Link>
       </header>
 
       <main className="flex flex-col items-center justify-items-center gap-16 pt-10">
