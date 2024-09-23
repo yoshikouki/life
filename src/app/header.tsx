@@ -20,7 +20,7 @@ export const Header = () => {
   return (
     <>
       <header className="pointer-events-none fixed top-0 z-50 flex w-full touch-none justify-center px-4 py-4">
-        <div className="relative h-svh max-h-[1024px] min-h-20 w-full w-full max-w-sm">
+        <div className="relative h-svh min-h-20 w-full max-w-sm">
           <motion.div
             style={{
               position: "absolute",
@@ -66,7 +66,20 @@ export const Header = () => {
           </motion.div>
         </div>
       </header>
-      <div className="h-svh max-h-[1024px] min-h-20 w-full" />
+      <div className="flex h-svh min-h-20 w-full items-end justify-center">
+        <div className="relative h-12 w-[1px] rounded-full bg-border opacity-30">
+          <motion.div
+            animate={{ y: [0, 30, 50], height: [4, 20, 0] }}
+            transition={{
+              duration: 2,
+              repeat: Number.POSITIVE_INFINITY,
+              repeatType: "loop",
+              ease: "easeInOut",
+            }}
+            className="absolute w-[1px] rounded-full bg-foreground"
+          />
+        </div>
+      </div>
     </>
   );
 };
