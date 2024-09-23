@@ -10,10 +10,10 @@ export const Header = () => {
   const translateY = useTransform(scrollY, [0, 400], ["-50%", "0%"], {
     ease: easeInOut,
   });
-  const left = useTransform(scrollY, [400, 500], ["50%", "0%"], {
+  const left = useTransform(scrollY, [400, 900], ["50%", "0%"], {
     ease: easeInOut,
   });
-  const translateX = useTransform(scrollY, [400, 500], ["-50%", "0%"], {
+  const translateX = useTransform(scrollY, [400, 900], ["-50%", "0%"], {
     ease: easeInOut,
   });
 
@@ -29,7 +29,7 @@ export const Header = () => {
               left,
               translateX,
             }}
-            className="pointer-events-none flex origin-center touch-none items-center"
+            className="pointer-events-auto flex origin-center touch-auto items-center"
           >
             {"yoshikouki".split("").map((char, index) => (
               <motion.span
