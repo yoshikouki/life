@@ -1,6 +1,7 @@
 "use client";
 
 import { easeInOut, motion, useScroll, useTransform } from "framer-motion";
+import Link from "next/link";
 
 export const Header = () => {
   const { scrollY } = useScroll();
@@ -16,11 +17,20 @@ export const Header = () => {
   const translateX = useTransform(scrollY, [400, 700], ["-50%", "0%"], {
     ease: easeInOut,
   });
+  const color = useTransform(
+    scrollY,
+    [400, 700],
+    ["hsl(12 6.5% 35.1%)", "hsl(24 5.4% 63.9%)"],
+    {
+      ease: easeInOut,
+    },
+  );
 
   return (
     <>
-      <header className="pointer-events-none fixed top-0 z-50 flex w-full touch-none justify-center px-4 py-4">
-        <div className="relative h-svh min-h-20 w-full max-w-sm">
+      <header className="pointer-events-none fixed top-0 z-50 flex w-full touch-none justify-center">
+        <div className="relative flex h-svh min-h-20 w-full max-w-sm justify-end">
+          {/* Logo */}
           <motion.div
             style={{
               position: "absolute",
@@ -29,7 +39,7 @@ export const Header = () => {
               left,
               translateX,
             }}
-            className="pointer-events-auto flex origin-center touch-auto items-center"
+            className="pointer-events-auto flex origin-center touch-auto items-center px-4 py-4 text-base"
           >
             {"yoshikouki".split("").map((char, index) => (
               <motion.span
@@ -64,6 +74,16 @@ export const Header = () => {
               className="bg-border"
             />
           </motion.div>
+
+          {/* Nav */}
+          <motion.nav
+            style={{ color }}
+            className="pointer-events-auto flex h-fit touch-auto items-center text-base"
+          >
+            <Link href="/canvas" className="px-4 py-4">
+              Canvas
+            </Link>
+          </motion.nav>
         </div>
       </header>
       <div className="flex h-svh min-h-20 w-full items-end justify-center">
