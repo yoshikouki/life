@@ -1,6 +1,5 @@
-import Link from "next/link";
-
 import { cn } from "@/lib/utils";
+import { AnimatedLink } from "../animated-link";
 import { Typing } from "../animation/typing";
 
 export const HeaderContainer = ({
@@ -18,14 +17,14 @@ export const HeaderContainer = ({
 
 export const HeaderLogo = () => {
   return (
-    <Link
+    <AnimatedLink
       href="/"
       className="pointer-events-auto flex h-14 touch-auto items-center px-4 text-base"
     >
       <Typing cursorClassName="h-4 ml-[2px]" loop>
         yoshikouki
       </Typing>
-    </Link>
+    </AnimatedLink>
   );
 };
 
@@ -41,9 +40,9 @@ export const HeaderNav = ({
         className,
       )}
     >
-      <Link href="/canvas" className="flex items-center px-4">
+      <AnimatedLink href="/canvas" className="flex items-center px-4">
         Canvas
-      </Link>
+      </AnimatedLink>
     </nav>
   );
 };
