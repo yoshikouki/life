@@ -20,6 +20,10 @@ export const HeaderLogo = () => {
     <AnimatedLink
       href="/"
       className="pointer-events-auto flex h-14 touch-auto items-center px-4 text-base"
+      // MEMO: Translating animation is unpleasant.
+      // style={{
+      //   viewTransitionName: "header-logo",
+      // }}
     >
       <Typing cursorClassName="h-4 ml-[2px]" loop>
         yoshikouki
@@ -40,7 +44,13 @@ export const HeaderNav = ({
         className,
       )}
     >
-      <AnimatedLink href="/canvas" className="flex items-center px-4">
+      <AnimatedLink
+        href="/canvas"
+        className="flex items-center px-4"
+        style={{
+          viewTransitionName: "header-nav-canvas",
+        }}
+      >
         Canvas
       </AnimatedLink>
     </nav>

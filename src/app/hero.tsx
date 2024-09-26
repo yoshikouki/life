@@ -28,7 +28,7 @@ export const Hero = () => {
 
   return (
     <>
-      <HeaderContainer className="relative flex h-svh min-h-20 w-full max-w-sm justify-end">
+      <HeaderContainer className="relative flex h-svh justify-end">
         <motion.div
           style={{
             position: "absolute",
