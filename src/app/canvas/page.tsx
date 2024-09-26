@@ -13,25 +13,31 @@ export default function CanvasPage() {
       </HeaderContainer>
 
       <main className="flex flex-col items-center justify-items-center gap-16 pt-10">
-        <section className="flex w-full max-w-sm flex-col gap-4 px-4">
+        <section className="flex w-full max-w-sm flex-col gap-20 px-4">
           <h2 className="pb-4 font-black text-2xl">Framer Motion</h2>
 
-          <h3 className="font-black text-xl">Slide up</h3>
-          <CanvasItem>
-            <SlideUp repeat>Framer Motion</SlideUp>
-          </CanvasItem>
+          <div className="space-y-4">
+            <h3 className="font-black text-xl">Slide up</h3>
+            <CanvasItem>
+              <SlideUp repeat>Framer Motion</SlideUp>
+            </CanvasItem>
+          </div>
 
-          <h3 className="font-black text-xl">Grow right</h3>
-          <CanvasItem>
-            <UnmaskRight repeat>Framer Motion</UnmaskRight>
-          </CanvasItem>
+          <div className="space-y-4">
+            <h3 className="font-black text-xl">Grow right</h3>
+            <CanvasItem>
+              <UnmaskRight repeat>Framer Motion</UnmaskRight>
+            </CanvasItem>
+          </div>
 
-          <h3 className="font-black text-xl">Typing</h3>
-          <CanvasItem>
-            <Typing cursorClassName="h-4" loop repeat>
-              Framer Motion
-            </Typing>
-          </CanvasItem>
+          <div className="space-y-4">
+            <h3 className="font-black text-xl">Typing</h3>
+            <CanvasItem>
+              <Typing cursorClassName="h-4" loop repeat>
+                Framer Motion
+              </Typing>
+            </CanvasItem>
+          </div>
         </section>
       </main>
     </>
