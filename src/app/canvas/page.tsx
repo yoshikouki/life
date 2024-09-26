@@ -1,4 +1,4 @@
-import { SlideUp } from "@/components/animattion/slide-up";
+import { SlideUp } from "@/components/animation/slide-up";
 import { HeaderContainer, HeaderLogo, HeaderNav } from "@/components/header";
 
 export default function CanvasPage() {

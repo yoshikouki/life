@@ -1,5 +1,5 @@
-import { SlideUp } from "@/components/animattion/slide-up";
-import { Typing } from "@/components/animattion/typing";
+import { SlideUp } from "@/components/animation/slide-up";
+import { Typing } from "@/components/animation/typing";
 import Link from "next/link";
 import { Hero } from "./hero";
 

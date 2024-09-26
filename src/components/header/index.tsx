@@ -1,6 +1,7 @@
-import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { Typing } from "../animattion/typing";
+
+import { cn } from "@/lib/utils";
+import { Typing } from "../animation/typing";
 
 export const HeaderContainer = ({
   children,
