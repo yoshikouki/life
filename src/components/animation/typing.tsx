@@ -9,6 +9,7 @@ export const Typing = ({
   loop = false,
   className = "",
   cursorClassName = "",
+  repeat = false,
 }: {
   children: string;
   typingSpeed?: number;
@@ -17,6 +18,7 @@ export const Typing = ({
   loop?: boolean;
   className?: string;
   cursorClassName?: string;
+  repeat?: boolean;
 }) => {
   const chars = children.split("");
   const typingDuration = delayStart + chars.length * typingSpeed;
@@ -25,6 +27,13 @@ export const Typing = ({
     : Math.ceil(typingDuration / cursorDuration) % 2 === 0
       ? Math.ceil(typingDuration / cursorDuration) + 3
       : Math.ceil(typingDuration / cursorDuration) + 2;
+
+  const repeatOption = repeat
+    ? {
+        repeat: Number.POSITIVE_INFINITY,
+        repeatDelay: 3,
+      }
+    : {};
 
   return (
     <div className={cn("flex h-full items-center", className)}>
@@ -35,8 +44,9 @@ export const Typing = ({
           transition={{
             delay: delayStart + index * typingSpeed,
             duration: 0,
+            ...repeatOption,
           }}
-          viewport={{ once: true }}
+          viewport={{ once: !repeat }}
           // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
           key={`${char}-${index}`}
         >
@@ -58,7 +68,7 @@ export const Typing = ({
         style={{
           width: "0.1rem",
         }}
-        className={cn("ml-1 h-full bg-border", cursorClassName)}
+        className={cn("ml-[2px] h-full bg-border", cursorClassName)}
       />
     </div>
   );

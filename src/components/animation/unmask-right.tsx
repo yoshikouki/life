@@ -1,6 +1,18 @@
 import * as motion from "framer-motion/client";
 
-export const UnmaskRight = ({ children }: { children: React.ReactNode }) => {
+export const UnmaskRight = ({
+  children,
+  repeat = false,
+}: {
+  children: React.ReactNode;
+  repeat?: boolean;
+}) => {
+  const repeatOption = repeat
+    ? {
+        repeat: Number.POSITIVE_INFINITY,
+        repeatDelay: 3,
+      }
+    : {};
   return (
     <div className="relative">
       <motion.div
@@ -8,7 +20,12 @@ export const UnmaskRight = ({ children }: { children: React.ReactNode }) => {
         whileInView={{
           opacity: 1,
         }}
-        transition={{ duration: 0, delay: 0.1, ease: "easeInOut" }}
+        transition={{
+          duration: 0,
+          delay: 0.1,
+          ease: "easeInOut",
+          ...repeatOption,
+        }}
         viewport={{ once: true }}
       >
         {children}
@@ -24,7 +41,11 @@ export const UnmaskRight = ({ children }: { children: React.ReactNode }) => {
             "inset(0 0 0 100%)",
           ],
         }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
+        transition={{
+          duration: 0.5,
+          ease: "easeInOut",
+          ...repeatOption,
+        }}
         viewport={{ once: true }}
       />
     </div>

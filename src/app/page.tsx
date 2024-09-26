@@ -79,7 +79,7 @@ export default function Home() {
       <main className="flex flex-col items-center justify-items-center gap-16 pt-28">
         <section className="flex w-full max-w-sm flex-col gap-8">
           <h2 className="px-4 font-black text-6xl">
-            <Typing className="h-14">Contents</Typing>
+            <Typing cursorClassName="ml-1 h-14">Contents</Typing>
           </h2>
           <div className="grid grid-cols-1 gap-4">
             {contents.map((content) => (
@@ -98,7 +98,7 @@ export default function Home() {
 
         <section className="flex w-full max-w-sm flex-col gap-8">
           <h2 className="px-4 font-black text-6xl">
-            <Typing className="h-14">Work</Typing>
+            <Typing cursorClassName="ml-1 h-14">Work</Typing>
           </h2>
           <div className="grid grid-cols-1 gap-4">
             {work.map((sns) => (
@@ -113,7 +113,7 @@ export default function Home() {
 
         <section className="flex w-full max-w-sm flex-col gap-8">
           <h2 className="px-4 font-black text-6xl">
-            <Typing className="h-14">SNS</Typing>
+            <Typing cursorClassName="ml-1 h-14">SNS</Typing>
           </h2>
           <div className="grid grid-cols-1 gap-4">
             {sns.map((sns) => (
@@ -133,7 +133,7 @@ export default function Home() {
 
         <section className="flex w-full max-w-sm flex-col gap-8">
           <h2 className="px-4 font-black text-6xl">
-            <Typing className="h-14">Other Link</Typing>
+            <Typing cursorClassName="ml-1 h-14">Other Link</Typing>
           </h2>
           <div className="grid grid-cols-1 gap-4">
             {otherLinks.map((other) => (
