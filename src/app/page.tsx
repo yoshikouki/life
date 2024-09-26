@@ -1,7 +1,7 @@
 import { SlideUp } from "@/components/animattion/slide-up";
 import { Typing } from "@/components/animattion/typing";
 import Link from "next/link";
-import { Header } from "./header";
+import { Hero } from "./hero";
 
 const contents = [
   {
@@ -74,7 +74,7 @@ const otherLinks = [
 export default function Home() {
   return (
     <>
-      <Header />
+      <Hero />
 
       <main className="flex flex-col items-center justify-items-center gap-16 pt-28">
         <section className="flex w-full max-w-sm flex-col gap-8">
