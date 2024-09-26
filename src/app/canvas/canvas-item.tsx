@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 import { type VariantProps, cva } from "class-variance-authority";
-import React from "react";
 
 const canvasItemVariants = cva(
   "flex w-full items-center justify-center rounded border-[0.5px] ring-offset-background transition-all duration-1000" +
@@ -28,14 +27,20 @@ export interface DivProps
   asChild?: boolean;
 }
 
-export const CanvasItem = React.forwardRef<HTMLDivElement, DivProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    return (
-      <div
-        className={cn(canvasItemVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
-    );
-  },
-);
+export const CanvasItem = ({
+  children,
+  className,
+  variant,
+  size,
+  asChild = false,
+  ...props
+}: DivProps) => {
+  return (
+    <div
+      className={cn(canvasItemVariants({ variant, size, className }))}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+};
