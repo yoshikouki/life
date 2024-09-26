@@ -1,5 +1,6 @@
 "use client";
 
+import { Typing } from "@/components/animattion/typing";
 import { easeInOut, motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 
@@ -39,48 +40,19 @@ export const Header = () => {
               left,
               translateX,
             }}
-            className="pointer-events-auto flex origin-center touch-auto items-center px-4 py-4 text-base"
+            className="pointer-events-auto flex h-14 touch-auto items-center px-4 text-base"
           >
-            {"yoshikouki".split("").map((char, index) => (
-              <motion.span
-                initial={{ visibility: "hidden", width: 0 }}
-                animate={{ visibility: "visible", width: "auto" }}
-                transition={{
-                  delay: 1 + index * 0.1,
-                  duration: 0,
-                }}
-                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                key={`${char}-${index}`}
-              >
-                {char}
-              </motion.span>
-            ))}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: 1,
-              }}
-              transition={{
-                duration: 0.5,
-                ease: "anticipate",
-                repeat: Number.POSITIVE_INFINITY,
-                repeatType: "mirror",
-              }}
-              style={{
-                marginLeft: "0.1rem",
-                width: 1,
-                height: "1rem",
-              }}
-              className="bg-border"
-            />
+            <Typing cursorClassName="h-4 ml-[2px]" loop>
+              yoshikouki
+            </Typing>
           </motion.div>
 
           {/* Nav */}
           <motion.nav
             style={{ color }}
-            className="pointer-events-auto flex h-fit touch-auto items-center text-base"
+            className="pointer-events-auto flex h-14 touch-auto items-stretch text-base"
           >
-            <Link href="/canvas" className="px-4 py-4">
+            <Link href="/canvas" className="flex items-center px-4">
               Canvas
             </Link>
           </motion.nav>

@@ -8,6 +8,7 @@ export const Typing = ({
   cursorDuration = 0.5,
   loop = false,
   className = "",
+  cursorClassName = "",
 }: {
   children: string;
   typingSpeed?: number;
@@ -15,6 +16,7 @@ export const Typing = ({
   cursorDuration?: number;
   loop?: boolean;
   className?: string;
+  cursorClassName?: string;
 }) => {
   const chars = children.split("");
   const typingDuration = delayStart + chars.length * typingSpeed;
@@ -54,10 +56,9 @@ export const Typing = ({
         }}
         viewport={{ once: true }}
         style={{
-          marginLeft: "0.4rem",
           width: "0.1rem",
         }}
-        className="h-full bg-border"
+        className={cn("ml-1 h-full bg-border", cursorClassName)}
       />
     </div>
   );
