@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 
-export const title = "Lastio - Awesome App";
-export const description = "Lastio is an awesome app!";
+export const title = "yoshikouki | Web Developer & Engineer";
+export const description =
+  "yoshikouki の作品と自己紹介を掲載するポートフォリオ。鹿児島在住の開発者。Web を主軸とした創作活動が趣味。Web3、プロダクト開発、コミュニティ活動などに興味を示す。";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://yoshikouki.com/"),
