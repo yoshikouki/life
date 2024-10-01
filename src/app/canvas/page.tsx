@@ -18,6 +18,19 @@ export default function CanvasPage() {
           <h2 className="pb-4 font-black text-2xl">Framer Motion</h2>
 
           <div className="space-y-2">
+            <CanvasTitle source="https://github.com/yoshikouki/life/blob/main/src/components/animation/parallax.tsx">
+              Parallax scroll
+            </CanvasTitle>
+            <CanvasItem className="items-start" size={"square"}>
+              <iframe
+                src="/canvas/parallax"
+                title="Sample parallax scroll"
+                className="h-full w-full"
+              />
+            </CanvasItem>
+          </div>
+
+          <div className="space-y-2">
             <CanvasTitle source="https://github.com/yoshikouki/life/blob/main/src/components/animation/slide-up.tsx">
               Slide up
             </CanvasTitle>
