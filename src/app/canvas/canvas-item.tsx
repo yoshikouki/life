@@ -3,7 +3,7 @@ import { type VariantProps, cva } from "class-variance-authority";
 
 const canvasItemVariants = cva(
   "flex w-full items-center justify-center rounded border-[0.5px] ring-offset-background transition-all duration-1000" +
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+    "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
   {
     variants: {
       variant: {

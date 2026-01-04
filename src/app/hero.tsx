@@ -48,7 +48,7 @@ export const Hero = () => {
       </HeaderContainer>
 
       <div className="absolute inset-x-0 bottom-0 flex justify-center">
-        <div className="relative h-12 w-[1px] rounded-full bg-border opacity-30">
+        <div className="relative h-12 w-px rounded-full bg-border opacity-30">
           <motion.div
             animate={{ y: [0, 30, 50], height: [4, 20, 0] }}
             transition={{
@@ -57,7 +57,7 @@ export const Hero = () => {
               repeatType: "loop",
               ease: "easeInOut",
             }}
-            className="absolute w-[1px] rounded-full bg-foreground"
+            className="absolute w-px rounded-full bg-foreground"
           />
         </div>
       </div>
