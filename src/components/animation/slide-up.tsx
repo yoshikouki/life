@@ -1,5 +1,6 @@
-import type { HTMLMotionProps } from "framer-motion";
-import * as motion from "framer-motion/client";
+"use client";
+
+import { type HTMLMotionProps, motion } from "motion/react";
 
 export const SlideUp = ({
   children,

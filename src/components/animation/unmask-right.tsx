@@ -1,4 +1,6 @@
-import * as motion from "framer-motion/client";
+"use client";
+
+import { motion } from "motion/react";
 
 export const UnmaskRight = ({
   children,

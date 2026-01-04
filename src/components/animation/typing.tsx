@@ -1,5 +1,7 @@
+"use client";
+
 import { cn } from "@/lib/utils";
-import * as motion from "framer-motion/client";
+import { motion } from "motion/react";
 
 export const Typing = ({
   children,
