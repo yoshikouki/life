@@ -1,7 +1,7 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
+import { cn } from "@/lib/utils";
 
 export const Typing = ({
   children,
@@ -49,7 +49,7 @@ export const Typing = ({
             ...repeatOption,
           }}
           viewport={{ once: !repeat }}
-          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+          // biome-ignore lint/suspicious/noArrayIndexKey: Index is needed for character position
           key={`${char}-${index}`}
         >
           {char}

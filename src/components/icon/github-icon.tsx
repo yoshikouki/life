@@ -4,7 +4,7 @@ export const GitHubIcon = ({
   className,
   ...props
 }: React.SVGProps<SVGSVGElement>) => (
-  // biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
+  // biome-ignore lint/a11y/noSvgWithoutTitle: Decorative icon
   <svg
     width="98"
     height="96"

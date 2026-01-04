@@ -7,7 +7,11 @@ export const Parallax = ({
   children,
   distance,
   className,
-}: { children: React.ReactNode; distance: number; className?: string }) => {
+}: {
+  children: React.ReactNode;
+  distance: number;
+  className?: string;
+}) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], [0, distance]);

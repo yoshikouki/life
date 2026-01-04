@@ -12,7 +12,7 @@ export const TouchyButton = ({
     <button
       type="button"
       className={cn(
-        "border px-4 py-2 rounded-lg",
+        "rounded-lg border px-4 py-2",
         styles.touchyButton,
         className,
       )}

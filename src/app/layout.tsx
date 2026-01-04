@@ -1,7 +1,7 @@
 import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
-import { cn } from "@/lib/utils";
 import { ViewTransitions } from "next-view-transitions";
+import { cn } from "@/lib/utils";
 import { Footer } from "./footer";
 
 export { metadata, viewport } from "./metadata";

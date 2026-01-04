@@ -5,7 +5,10 @@ import { Typing } from "../animation/typing";
 export const HeaderContainer = ({
   children,
   className,
-}: { children: React.ReactNode; className?: string }) => {
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
   return (
     <header className="pointer-events-none sticky top-0 z-50 flex w-full touch-none justify-center">
       <div className={cn("flex w-full max-w-sm justify-between", className)}>

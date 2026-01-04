@@ -1,5 +1,5 @@
+import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { type VariantProps, cva } from "class-variance-authority";
 
 const canvasItemVariants = cva(
   "flex w-full items-center justify-center rounded border-[0.5px] ring-offset-background transition-all duration-1000" +

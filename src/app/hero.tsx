@@ -1,7 +1,7 @@
 "use client";
 
-import { HeaderContainer, HeaderLogo, HeaderNav } from "@/components/header";
 import { easeInOut, motion, useScroll, useTransform } from "motion/react";
+import { HeaderContainer, HeaderLogo, HeaderNav } from "@/components/header";
 
 export const Hero = () => {
   const { scrollY } = useScroll();

@@ -1,6 +1,6 @@
+import Link from "next/link";
 import { GitHubIcon } from "@/components/icon/github-icon";
 import { XIcon } from "@/components/icon/x-icon";
-import Link from "next/link";
 
 export const Footer = () => {
   return (

@@ -1,11 +1,9 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "organizeImports": {
-    "enabled": true
-  },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "formatter": {
     "indentStyle": "space",
-    "ignore": []
+    "includes": ["**"]
   },
   "linter": {
     "enabled": true,
@@ -28,7 +26,8 @@
       "enabled": true
     },
     "parser": {
-      "cssModules": true
+      "cssModules": true,
+      "tailwindDirectives": true
     }
   },
   "vcs": {

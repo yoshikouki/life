@@ -1,5 +1,5 @@
-import { AnimatedLink } from "@/components/animated-link";
 import { CodeXmlIcon } from "lucide-react";
+import { AnimatedLink } from "@/components/animated-link";
 
 export const CanvasTitle = ({
   children,
