@@ -2,6 +2,7 @@ import { SlideUp } from "@/components/animation/slide-up";
 import { Typing } from "@/components/animation/typing";
 import { UnmaskRight } from "@/components/animation/unmask-right";
 import { HeaderContainer, HeaderLogo, HeaderNav } from "@/components/header";
+import { TouchyButton } from "@/components/touchy-button";
 import { CanvasItem } from "./canvas-item";
 import { CanvasTitle } from "./canvas-title";
 
@@ -16,6 +17,15 @@ export default function CanvasPage() {
       <main className="flex flex-col items-center justify-items-center gap-16 pt-10">
         <section className="flex w-full max-w-sm flex-col gap-20 px-4">
           <h2 className="pb-4 font-black text-2xl">Framer Motion</h2>
+
+          <div className="space-y-2">
+            <CanvasTitle source="https://github.com/yoshikouki/life/blob/main/src/components/animation/parallax.tsx">
+              Button
+            </CanvasTitle>
+            <CanvasItem size={"square"}>
+              <TouchyButton>Push</TouchyButton>
+            </CanvasItem>
+          </div>
 
           <div className="space-y-2">
             <CanvasTitle source="https://github.com/yoshikouki/life/blob/main/src/components/animation/parallax.tsx">
