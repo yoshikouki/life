@@ -118,11 +118,7 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-4">
             {sns.map((item) => (
               <SlideUp key={item.url}>
-                <Link
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link href={item.url} target="_blank" rel="noopener noreferrer">
                   <div className="px-4 text-lg">{item.name}</div>
                 </Link>
               </SlideUp>
@@ -137,11 +133,7 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-4">
             {otherLinks.map((item) => (
               <SlideUp key={item.url}>
-                <Link
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link href={item.url} target="_blank" rel="noopener noreferrer">
                   <div className="px-4 text-lg">{item.name}</div>
                 </Link>
               </SlideUp>
