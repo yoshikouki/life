@@ -31,8 +31,8 @@ const work = [
 
 const sns = [
   {
-    name: "Twitter",
-    url: "https://twitter.com/yoshikouki_",
+    name: "X",
+    url: "https://x.com/yoshikouki_",
   },
   {
     name: "note",
@@ -101,10 +101,10 @@ export default function Home() {
             <Typing cursorClassName="ml-1 h-14">Work</Typing>
           </h2>
           <div className="grid grid-cols-1 gap-4">
-            {work.map((sns) => (
-              <SlideUp key={sns.url}>
-                <Link href={sns.url} target="_blank" rel="noopener noreferrer">
-                  <div className="px-4 text-lg">{sns.name}</div>
+            {work.map((item) => (
+              <SlideUp key={item.url}>
+                <Link href={item.url} target="_blank" rel="noopener noreferrer">
+                  <div className="px-4 text-lg">{item.name}</div>
                 </Link>
               </SlideUp>
             ))}
@@ -116,15 +116,14 @@ export default function Home() {
             <Typing cursorClassName="ml-1 h-14">SNS</Typing>
           </h2>
           <div className="grid grid-cols-1 gap-4">
-            {sns.map((sns) => (
-              <SlideUp key={sns.url}>
+            {sns.map((item) => (
+              <SlideUp key={item.url}>
                 <Link
-                  key={sns.url}
-                  href={sns.url}
+                  href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <div className="px-4 text-lg">{sns.name}</div>
+                  <div className="px-4 text-lg">{item.name}</div>
                 </Link>
               </SlideUp>
             ))}
@@ -136,15 +135,14 @@ export default function Home() {
             <Typing cursorClassName="ml-1 h-14">Other Link</Typing>
           </h2>
           <div className="grid grid-cols-1 gap-4">
-            {otherLinks.map((other) => (
-              <SlideUp key={other.url}>
+            {otherLinks.map((item) => (
+              <SlideUp key={item.url}>
                 <Link
-                  key={other.url}
-                  href={other.url}
+                  href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <div className="px-4 text-lg">{other.name}</div>
+                  <div className="px-4 text-lg">{item.name}</div>
                 </Link>
               </SlideUp>
             ))}

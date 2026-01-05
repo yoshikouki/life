@@ -8,7 +8,15 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://yoshikouki.com/"),
   title,
   description,
-  keywords: [],
+  keywords: [
+    "yoshikouki",
+    "Web Developer",
+    "Engineer",
+    "Portfolio",
+    "鹿児島",
+    "Web3",
+    "プロダクト開発",
+  ],
   authors: { name: "yoshikouki", url: "https://yoshikouki.com/" },
   icons: [
     {
