@@ -3,8 +3,11 @@ import "./globals.css";
 import { ViewTransitions } from "next-view-transitions";
 import { cn } from "@/lib/utils";
 import { Footer } from "./footer";
+import { metadata as _metadata, viewport as _viewport } from "./metadata";
 
-export { metadata, viewport } from "./metadata";
+// biome-ignore lint/performance/noBarrelFile: Required for Next.js metadata export convention
+export const metadata = _metadata;
+export const viewport = _viewport;
 
 const font = Noto_Sans_JP({
   subsets: ["latin"],

@@ -11,8 +11,8 @@ describe("cn", () => {
   });
 
   test("条件付きクラス名を処理する", () => {
-    expect(cn("foo", false && "bar", "baz")).toBe("foo baz");
-    expect(cn("foo", true && "bar", "baz")).toBe("foo bar baz");
+    expect(cn("foo", false, "baz")).toBe("foo baz");
+    expect(cn("foo", "bar", "baz")).toBe("foo bar baz");
   });
 
   test("Tailwindの競合するクラスをマージする", () => {

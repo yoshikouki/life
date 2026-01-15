@@ -6,9 +6,9 @@ export const XIcon = ({
 }: React.SVGProps<SVGSVGElement>) => (
   // biome-ignore lint/a11y/noSvgWithoutTitle: Decorative icon
   <svg
-    width="1200"
     height="1227"
     viewBox="0 0 1200 1227"
+    width="1200"
     xmlns="http://www.w3.org/2000/svg"
     {...props}
     className={cn("fill-muted-foreground", className)}

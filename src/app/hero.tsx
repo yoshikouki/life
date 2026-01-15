@@ -23,7 +23,7 @@ export const Hero = () => {
     ["hsl(12 6.5% 35.1%)", "hsl(24 5.4% 63.9%)"],
     {
       ease: easeInOut,
-    },
+    }
   );
 
   return (
@@ -51,13 +51,13 @@ export const Hero = () => {
         <div className="relative h-12 w-px rounded-full bg-border opacity-30">
           <motion.div
             animate={{ y: [0, 30, 50], height: [4, 20, 0] }}
+            className="absolute w-px rounded-full bg-foreground"
             transition={{
               duration: 2,
               repeat: Number.POSITIVE_INFINITY,
               repeatType: "loop",
               ease: "easeInOut",
             }}
-            className="absolute w-px rounded-full bg-foreground"
           />
         </div>
       </div>

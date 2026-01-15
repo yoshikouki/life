@@ -24,11 +24,15 @@ export const Typing = ({
 }) => {
   const chars = children.split("");
   const typingDuration = delayStart + chars.length * typingSpeed;
-  const loopCount = loop
-    ? Number.POSITIVE_INFINITY
-    : Math.ceil(typingDuration / cursorDuration) % 2 === 0
-      ? Math.ceil(typingDuration / cursorDuration) + 3
-      : Math.ceil(typingDuration / cursorDuration) + 2;
+  const calculateLoopCount = () => {
+    if (loop) {
+      return Number.POSITIVE_INFINITY;
+    }
+    const baseCycles = Math.ceil(typingDuration / cursorDuration);
+    const isEven = baseCycles % 2 === 0;
+    return isEven ? baseCycles + 3 : baseCycles + 2;
+  };
+  const loopCount = calculateLoopCount();
 
   const repeatOption = repeat
     ? {
@@ -42,23 +46,24 @@ export const Typing = ({
       {chars.map((char, index) => (
         <motion.span
           initial={{ visibility: "hidden", width: 0 }}
-          whileInView={{ visibility: "visible", width: "auto" }}
+          // biome-ignore lint/suspicious/noArrayIndexKey: Index is needed for character position
+          key={`${char}-${index}`}
           transition={{
             delay: delayStart + index * typingSpeed,
             duration: 0,
             ...repeatOption,
           }}
           viewport={{ once: !repeat }}
-          // biome-ignore lint/suspicious/noArrayIndexKey: Index is needed for character position
-          key={`${char}-${index}`}
+          whileInView={{ visibility: "visible", width: "auto" }}
         >
           {char}
         </motion.span>
       ))}
       <motion.span
+        className={cn("ml-[2px] h-full bg-border", cursorClassName)}
         initial={{ opacity: 0 }}
-        whileInView={{
-          opacity: 1,
+        style={{
+          width: "0.1rem",
         }}
         transition={{
           duration: cursorDuration,
@@ -67,10 +72,9 @@ export const Typing = ({
           repeatType: "mirror",
         }}
         viewport={{ once: true }}
-        style={{
-          width: "0.1rem",
+        whileInView={{
+          opacity: 1,
         }}
-        className={cn("ml-[2px] h-full bg-border", cursorClassName)}
       />
     </div>
   );

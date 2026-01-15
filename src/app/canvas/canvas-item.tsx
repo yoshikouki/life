@@ -18,7 +18,7 @@ const canvasItemVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
 export interface DivProps

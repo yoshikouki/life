@@ -86,8 +86,8 @@ export default function Home() {
               <SlideUp key={content.url}>
                 <Link
                   href={content.url}
-                  target="_blank"
                   rel="noopener noreferrer"
+                  target="_blank"
                 >
                   <div className="px-4 text-lg">{content.name}</div>
                 </Link>
@@ -103,7 +103,7 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-4">
             {work.map((item) => (
               <SlideUp key={item.url}>
-                <Link href={item.url} target="_blank" rel="noopener noreferrer">
+                <Link href={item.url} rel="noopener noreferrer" target="_blank">
                   <div className="px-4 text-lg">{item.name}</div>
                 </Link>
               </SlideUp>
@@ -118,7 +118,7 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-4">
             {sns.map((item) => (
               <SlideUp key={item.url}>
-                <Link href={item.url} target="_blank" rel="noopener noreferrer">
+                <Link href={item.url} rel="noopener noreferrer" target="_blank">
                   <div className="px-4 text-lg">{item.name}</div>
                 </Link>
               </SlideUp>
@@ -133,7 +133,7 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-4">
             {otherLinks.map((item) => (
               <SlideUp key={item.url}>
-                <Link href={item.url} target="_blank" rel="noopener noreferrer">
+                <Link href={item.url} rel="noopener noreferrer" target="_blank">
                   <div className="px-4 text-lg">{item.name}</div>
                 </Link>
               </SlideUp>

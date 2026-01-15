@@ -33,9 +33,9 @@ export default function CanvasPage() {
             </CanvasTitle>
             <CanvasItem className="items-start" size={"square"}>
               <iframe
+                className="h-full w-full"
                 src="/canvas/parallax"
                 title="Sample parallax scroll"
-                className="h-full w-full"
               />
             </CanvasItem>
           </div>

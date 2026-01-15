@@ -19,9 +19,6 @@ export const UnmaskRight = ({
     <div className="relative">
       <motion.div
         initial={{ opacity: 0 }}
-        whileInView={{
-          opacity: 1,
-        }}
         transition={{
           duration: 0,
           delay: 0.1,
@@ -29,12 +26,21 @@ export const UnmaskRight = ({
           ...repeatOption,
         }}
         viewport={{ once: true }}
+        whileInView={{
+          opacity: 1,
+        }}
       >
         {children}
       </motion.div>
       <motion.div
         className="absolute inset-0 bg-foreground text-background"
         initial={{ clipPath: "inset(0 100% 0 0)" }}
+        transition={{
+          duration: 0.5,
+          ease: "easeInOut",
+          ...repeatOption,
+        }}
+        viewport={{ once: true }}
         whileInView={{
           clipPath: [
             "inset(0 100% 0 0)",
@@ -43,12 +49,6 @@ export const UnmaskRight = ({
             "inset(0 0 0 100%)",
           ],
         }}
-        transition={{
-          duration: 0.5,
-          ease: "easeInOut",
-          ...repeatOption,
-        }}
-        viewport={{ once: true }}
       />
     </div>
   );

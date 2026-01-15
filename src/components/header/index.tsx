@@ -21,8 +21,8 @@ export const HeaderContainer = ({
 export const HeaderLogo = () => {
   return (
     <AnimatedLink
-      href="/"
       className="pointer-events-auto flex h-14 touch-auto items-center px-4 text-base"
+      href="/"
       // MEMO: Translating animation is unpleasant.
       // style={{
       //   viewTransitionName: "header-logo",
@@ -44,12 +44,12 @@ export const HeaderNav = ({
     <nav
       className={cn(
         "pointer-events-auto flex h-14 touch-auto items-stretch text-base",
-        className,
+        className
       )}
     >
       <AnimatedLink
-        href="/canvas"
         className="flex items-center px-4"
+        href="/canvas"
         style={{
           viewTransitionName: "header-nav-canvas",
         }}

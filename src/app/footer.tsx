@@ -7,12 +7,12 @@ export const Footer = () => {
     <footer className="mt-20 flex w-full flex-col items-center justify-center gap-4 p-4">
       <div className="flex items-center gap-4 p-4">
         <Link
-          href="https://github.com/yoshikouki/life"
           aria-label="GitHub repository"
+          href="https://github.com/yoshikouki/life"
         >
           <GitHubIcon className="size-6" />
         </Link>
-        <Link href="https://x.com/yoshikouki_" aria-label="X (Twitter) profile">
+        <Link aria-label="X (Twitter) profile" href="https://x.com/yoshikouki_">
           <XIcon className="size-4 stroke-primary" />
         </Link>
       </div>

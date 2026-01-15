@@ -10,12 +10,12 @@ export const TouchyButton = ({
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
     <button
-      type="button"
       className={cn(
         "rounded-lg border px-4 py-2",
         styles.touchyButton,
-        className,
+        className
       )}
+      type="button"
       {...props}
     >
       {children}
