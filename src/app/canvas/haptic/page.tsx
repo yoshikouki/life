@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useHaptic } from "use-haptic";
 
 const SCROLL_THRESHOLD = 100;
@@ -13,15 +13,6 @@ interface KanbanItem {
 interface KanbanState {
   left: KanbanItem[];
   right: KanbanItem[];
-}
-
-interface DragState {
-  item: KanbanItem;
-  from: "left" | "right";
-  x: number;
-  y: number;
-  startX: number;
-  startY: number;
 }
 
 const getNewKanbanState = (
@@ -44,9 +35,10 @@ export default function HapticPage() {
   const [scrollY, setScrollY] = useState(0);
   const [hapticCount, setHapticCount] = useState(0);
   const lastHapticThreshold = useRef(0);
-  const [dragState, setDragState] = useState<DragState | null>(null);
-  const leftColumnRef = useRef<HTMLDivElement>(null);
-  const rightColumnRef = useRef<HTMLDivElement>(null);
+  const [selectedItem, setSelectedItem] = useState<{
+    item: KanbanItem;
+    from: "left" | "right";
+  } | null>(null);
 
   const [kanban, setKanban] = useState<KanbanState>({
     left: [
@@ -75,84 +67,33 @@ export default function HapticPage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [triggerHaptic]);
 
-  const handleTouchStart = useCallback(
-    (item: KanbanItem, from: "left" | "right", e: React.TouchEvent) => {
-      const touch = e.touches[0];
-      triggerHaptic();
-      setHapticCount((prev) => prev + 1);
-      setDragState({
-        item,
-        from,
-        x: touch.clientX,
-        y: touch.clientY,
-        startX: touch.clientX,
-        startY: touch.clientY,
-      });
-    },
-    [triggerHaptic]
-  );
+  const handleItemClick = (item: KanbanItem, from: "left" | "right") => {
+    triggerHaptic();
+    setHapticCount((prev) => prev + 1);
 
-  const handleTouchMove = useCallback(
-    (e: React.TouchEvent) => {
-      if (!dragState) {
-        return;
-      }
-      const touch = e.touches[0];
-      setDragState((prev) =>
-        prev ? { ...prev, x: touch.clientX, y: touch.clientY } : null
-      );
-    },
-    [dragState]
-  );
+    if (selectedItem?.item.id === item.id) {
+      setSelectedItem(null);
+    } else {
+      setSelectedItem({ item, from });
+    }
+  };
 
-  const handleTouchEnd = useCallback(() => {
-    if (!dragState) {
+  const handleColumnClick = (to: "left" | "right") => {
+    if (!selectedItem || selectedItem.from === to) {
       return;
     }
 
-    const leftRect = leftColumnRef.current?.getBoundingClientRect();
-    const rightRect = rightColumnRef.current?.getBoundingClientRect();
+    triggerHaptic();
+    setHapticCount((prev) => prev + 1);
 
-    let dropTarget: "left" | "right" | null = null;
-
-    if (leftRect && isPointInRect(dragState.x, dragState.y, leftRect)) {
-      dropTarget = "left";
-    } else if (
-      rightRect &&
-      isPointInRect(dragState.x, dragState.y, rightRect)
-    ) {
-      dropTarget = "right";
-    }
-
-    if (dropTarget && dropTarget !== dragState.from) {
-      triggerHaptic();
-      setHapticCount((prev) => prev + 1);
-      setKanban((prev) =>
-        getNewKanbanState(prev, dragState.from, dropTarget, dragState.item)
-      );
-    }
-
-    setDragState(null);
-  }, [dragState, triggerHaptic]);
+    setKanban((prev) =>
+      getNewKanbanState(prev, selectedItem.from, to, selectedItem.item)
+    );
+    setSelectedItem(null);
+  };
 
   return (
-    <div
-      className="min-h-[300vh] w-full"
-      onTouchEnd={handleTouchEnd}
-      onTouchMove={handleTouchMove}
-    >
-      {dragState && (
-        <div
-          className="pointer-events-none fixed z-50 rounded-md bg-blue-500 p-3 text-white opacity-90 shadow-lg"
-          style={{
-            left: dragState.x - 50,
-            top: dragState.y - 20,
-          }}
-        >
-          {dragState.item.title}
-        </div>
-      )}
-
+    <div className="min-h-[300vh] w-full">
       <div className="fixed top-4 right-4 z-10 rounded-lg bg-black/80 p-4 text-white backdrop-blur">
         <p className="font-mono text-sm">Haptic triggered: {hapticCount}x</p>
         <p className="mt-1 text-gray-400 text-xs">iOS Safari 18.0+ required</p>
@@ -179,70 +120,89 @@ export default function HapticPage() {
           </button>
         </section>
 
-        {/* Drag and Drop Section */}
+        {/* Tap to Move Section */}
         <section className="w-full max-w-md space-y-4">
-          <h2 className="font-semibold text-lg">2. Drag & Drop Kanban</h2>
+          <h2 className="font-semibold text-lg">2. Tap to Move Kanban</h2>
           <p className="text-muted-foreground text-sm">
-            Drag a card to the other column to feel haptic feedback.
+            Tap a card to select, then tap the other column to move it.
           </p>
           <div className="grid grid-cols-2 gap-4" role="application">
-            <div
+            <button
               aria-label="To Do column"
-              className="min-h-[200px] rounded-lg border-2 border-gray-300 border-dashed bg-gray-50 p-3 dark:border-gray-600 dark:bg-gray-900"
-              ref={leftColumnRef}
-              role="listbox"
+              className={`min-h-[200px] rounded-lg border-2 border-dashed p-3 text-left transition-colors ${
+                selectedItem && selectedItem.from === "right"
+                  ? "border-blue-500 bg-blue-50 dark:bg-blue-950"
+                  : "border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-gray-900"
+              }`}
+              onClick={() => handleColumnClick("left")}
+              type="button"
             >
               <h3 className="mb-3 font-medium text-gray-600 text-sm dark:text-gray-400">
                 To Do
               </h3>
               <div className="space-y-2">
                 {kanban.left.map((item) => (
-                  <div
+                  <button
                     aria-label={item.title}
-                    className={`touch-none select-none rounded-md bg-white p-3 shadow-sm transition-all dark:bg-gray-800 ${
-                      dragState?.item.id === item.id
-                        ? "opacity-50"
-                        : "active:scale-95"
+                    aria-pressed={selectedItem?.item.id === item.id}
+                    className={`w-full rounded-md p-3 text-left shadow-sm transition-all ${
+                      selectedItem?.item.id === item.id
+                        ? "bg-blue-500 text-white"
+                        : "bg-white active:scale-95 dark:bg-gray-800"
                     }`}
                     key={item.id}
-                    onTouchStart={(e) => handleTouchStart(item, "left", e)}
-                    role="option"
-                    tabIndex={0}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleItemClick(item, "left");
+                    }}
+                    type="button"
                   >
                     {item.title}
-                  </div>
+                  </button>
                 ))}
               </div>
-            </div>
-            <div
+            </button>
+            <button
               aria-label="Done column"
-              className="min-h-[200px] rounded-lg border-2 border-gray-300 border-dashed bg-gray-50 p-3 dark:border-gray-600 dark:bg-gray-900"
-              ref={rightColumnRef}
-              role="listbox"
+              className={`min-h-[200px] rounded-lg border-2 border-dashed p-3 text-left transition-colors ${
+                selectedItem && selectedItem.from === "left"
+                  ? "border-blue-500 bg-blue-50 dark:bg-blue-950"
+                  : "border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-gray-900"
+              }`}
+              onClick={() => handleColumnClick("right")}
+              type="button"
             >
               <h3 className="mb-3 font-medium text-gray-600 text-sm dark:text-gray-400">
                 Done
               </h3>
               <div className="space-y-2">
                 {kanban.right.map((item) => (
-                  <div
+                  <button
                     aria-label={item.title}
-                    className={`touch-none select-none rounded-md bg-white p-3 shadow-sm transition-all dark:bg-gray-800 ${
-                      dragState?.item.id === item.id
-                        ? "opacity-50"
-                        : "active:scale-95"
+                    aria-pressed={selectedItem?.item.id === item.id}
+                    className={`w-full rounded-md p-3 text-left shadow-sm transition-all ${
+                      selectedItem?.item.id === item.id
+                        ? "bg-blue-500 text-white"
+                        : "bg-white active:scale-95 dark:bg-gray-800"
                     }`}
                     key={item.id}
-                    onTouchStart={(e) => handleTouchStart(item, "right", e)}
-                    role="option"
-                    tabIndex={0}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleItemClick(item, "right");
+                    }}
+                    type="button"
                   >
                     {item.title}
-                  </div>
+                  </button>
                 ))}
               </div>
-            </div>
+            </button>
           </div>
+          {selectedItem && (
+            <p className="text-center text-muted-foreground text-sm">
+              「{selectedItem.item.title}」を選択中 - 移動先のカラムをタップ
+            </p>
+          )}
         </section>
 
         {/* Scroll Section */}
@@ -274,8 +234,4 @@ export default function HapticPage() {
       </div>
     </div>
   );
-}
-
-function isPointInRect(x: number, y: number, rect: DOMRect): boolean {
-  return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
 }
