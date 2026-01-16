@@ -6,9 +6,9 @@
     "dev": "bun --bun x next dev --turbo",
     "build": "bun --bun x next build",
     "start": "bun --bun x next start",
-    "lint": "bunx @biomejs/biome check .",
-    "format": "bunx @biomejs/biome check --write .",
-    "format:unsafe": "bunx @biomejs/biome check --write --unsafe .",
+    "lint": "bunx ultracite check",
+    "format": "bunx ultracite fix",
+    "format:unsafe": "bunx ultracite fix --unsafe=true .",
     "update:all": "bun update --latest",
     "prepare": "husky"
   },
