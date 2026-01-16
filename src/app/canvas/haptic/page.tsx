@@ -127,15 +127,12 @@ export default function HapticPage() {
             Tap a card to select, then tap the other column to move it.
           </p>
           <div className="grid grid-cols-2 gap-4" role="application">
-            <button
-              aria-label="To Do column"
-              className={`min-h-[200px] rounded-lg border-2 border-dashed p-3 text-left transition-colors ${
+            <div
+              className={`min-h-[200px] rounded-lg border-2 border-dashed p-3 transition-colors ${
                 selectedItem && selectedItem.from === "right"
                   ? "border-blue-500 bg-blue-50 dark:bg-blue-950"
                   : "border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-gray-900"
               }`}
-              onClick={() => handleColumnClick("left")}
-              type="button"
             >
               <h3 className="mb-3 font-medium text-gray-600 text-sm dark:text-gray-400">
                 To Do
@@ -151,26 +148,29 @@ export default function HapticPage() {
                         : "bg-white active:scale-95 dark:bg-gray-800"
                     }`}
                     key={item.id}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleItemClick(item, "left");
-                    }}
+                    onClick={() => handleItemClick(item, "left")}
                     type="button"
                   >
                     {item.title}
                   </button>
                 ))}
+                {selectedItem && selectedItem.from === "right" && (
+                  <button
+                    className="w-full rounded-md border-2 border-blue-400 border-dashed p-3 text-center text-blue-600 transition-all active:scale-95 dark:text-blue-400"
+                    onClick={() => handleColumnClick("left")}
+                    type="button"
+                  >
+                    ここに移動
+                  </button>
+                )}
               </div>
-            </button>
-            <button
-              aria-label="Done column"
-              className={`min-h-[200px] rounded-lg border-2 border-dashed p-3 text-left transition-colors ${
+            </div>
+            <div
+              className={`min-h-[200px] rounded-lg border-2 border-dashed p-3 transition-colors ${
                 selectedItem && selectedItem.from === "left"
                   ? "border-blue-500 bg-blue-50 dark:bg-blue-950"
                   : "border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-gray-900"
               }`}
-              onClick={() => handleColumnClick("right")}
-              type="button"
             >
               <h3 className="mb-3 font-medium text-gray-600 text-sm dark:text-gray-400">
                 Done
@@ -186,17 +186,23 @@ export default function HapticPage() {
                         : "bg-white active:scale-95 dark:bg-gray-800"
                     }`}
                     key={item.id}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleItemClick(item, "right");
-                    }}
+                    onClick={() => handleItemClick(item, "right")}
                     type="button"
                   >
                     {item.title}
                   </button>
                 ))}
+                {selectedItem && selectedItem.from === "left" && (
+                  <button
+                    className="w-full rounded-md border-2 border-blue-400 border-dashed p-3 text-center text-blue-600 transition-all active:scale-95 dark:text-blue-400"
+                    onClick={() => handleColumnClick("right")}
+                    type="button"
+                  >
+                    ここに移動
+                  </button>
+                )}
               </div>
-            </button>
+            </div>
           </div>
           {selectedItem && (
             <p className="text-center text-muted-foreground text-sm">
