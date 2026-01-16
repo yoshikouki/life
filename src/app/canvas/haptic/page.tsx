@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useHaptic } from "use-haptic";
 
 const SCROLL_THRESHOLD = 100;
@@ -13,6 +13,15 @@ interface KanbanItem {
 interface KanbanState {
   left: KanbanItem[];
   right: KanbanItem[];
+}
+
+interface DragState {
+  item: KanbanItem;
+  from: "left" | "right";
+  x: number;
+  y: number;
+  startX: number;
+  startY: number;
 }
 
 const getNewKanbanState = (
@@ -35,10 +44,9 @@ export default function HapticPage() {
   const [scrollY, setScrollY] = useState(0);
   const [hapticCount, setHapticCount] = useState(0);
   const lastHapticThreshold = useRef(0);
-  const [draggedItem, setDraggedItem] = useState<{
-    item: KanbanItem;
-    from: "left" | "right";
-  } | null>(null);
+  const [dragState, setDragState] = useState<DragState | null>(null);
+  const leftColumnRef = useRef<HTMLDivElement>(null);
+  const rightColumnRef = useRef<HTMLDivElement>(null);
 
   const [kanban, setKanban] = useState<KanbanState>({
     left: [
@@ -67,31 +75,84 @@ export default function HapticPage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [triggerHaptic]);
 
-  const handleDragStart = (item: KanbanItem, from: "left" | "right") => {
-    setDraggedItem({ item, from });
-  };
+  const handleTouchStart = useCallback(
+    (item: KanbanItem, from: "left" | "right", e: React.TouchEvent) => {
+      const touch = e.touches[0];
+      triggerHaptic();
+      setHapticCount((prev) => prev + 1);
+      setDragState({
+        item,
+        from,
+        x: touch.clientX,
+        y: touch.clientY,
+        startX: touch.clientX,
+        startY: touch.clientY,
+      });
+    },
+    [triggerHaptic]
+  );
 
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-  };
+  const handleTouchMove = useCallback(
+    (e: React.TouchEvent) => {
+      if (!dragState) {
+        return;
+      }
+      const touch = e.touches[0];
+      setDragState((prev) =>
+        prev ? { ...prev, x: touch.clientX, y: touch.clientY } : null
+      );
+    },
+    [dragState]
+  );
 
-  const handleDrop = (to: "left" | "right") => {
-    if (!draggedItem || draggedItem.from === to) {
-      setDraggedItem(null);
+  const handleTouchEnd = useCallback(() => {
+    if (!dragState) {
       return;
     }
 
-    triggerHaptic();
-    setHapticCount((prev) => prev + 1);
+    const leftRect = leftColumnRef.current?.getBoundingClientRect();
+    const rightRect = rightColumnRef.current?.getBoundingClientRect();
 
-    setKanban((prev) =>
-      getNewKanbanState(prev, draggedItem.from, to, draggedItem.item)
-    );
-    setDraggedItem(null);
-  };
+    let dropTarget: "left" | "right" | null = null;
+
+    if (leftRect && isPointInRect(dragState.x, dragState.y, leftRect)) {
+      dropTarget = "left";
+    } else if (
+      rightRect &&
+      isPointInRect(dragState.x, dragState.y, rightRect)
+    ) {
+      dropTarget = "right";
+    }
+
+    if (dropTarget && dropTarget !== dragState.from) {
+      triggerHaptic();
+      setHapticCount((prev) => prev + 1);
+      setKanban((prev) =>
+        getNewKanbanState(prev, dragState.from, dropTarget, dragState.item)
+      );
+    }
+
+    setDragState(null);
+  }, [dragState, triggerHaptic]);
 
   return (
-    <div className="min-h-[300vh] w-full">
+    <div
+      className="min-h-[300vh] w-full"
+      onTouchEnd={handleTouchEnd}
+      onTouchMove={handleTouchMove}
+    >
+      {dragState && (
+        <div
+          className="pointer-events-none fixed z-50 rounded-md bg-blue-500 p-3 text-white opacity-90 shadow-lg"
+          style={{
+            left: dragState.x - 50,
+            top: dragState.y - 20,
+          }}
+        >
+          {dragState.item.title}
+        </div>
+      )}
+
       <div className="fixed top-4 right-4 z-10 rounded-lg bg-black/80 p-4 text-white backdrop-blur">
         <p className="font-mono text-sm">Haptic triggered: {hapticCount}x</p>
         <p className="mt-1 text-gray-400 text-xs">iOS Safari 18.0+ required</p>
@@ -128,8 +189,7 @@ export default function HapticPage() {
             <div
               aria-label="To Do column"
               className="min-h-[200px] rounded-lg border-2 border-gray-300 border-dashed bg-gray-50 p-3 dark:border-gray-600 dark:bg-gray-900"
-              onDragOver={handleDragOver}
-              onDrop={() => handleDrop("left")}
+              ref={leftColumnRef}
               role="listbox"
             >
               <h3 className="mb-3 font-medium text-gray-600 text-sm dark:text-gray-400">
@@ -139,10 +199,13 @@ export default function HapticPage() {
                 {kanban.left.map((item) => (
                   <div
                     aria-label={item.title}
-                    className="cursor-grab rounded-md bg-white p-3 shadow-sm transition-shadow hover:shadow-md active:cursor-grabbing dark:bg-gray-800"
-                    draggable
+                    className={`touch-none select-none rounded-md bg-white p-3 shadow-sm transition-all dark:bg-gray-800 ${
+                      dragState?.item.id === item.id
+                        ? "opacity-50"
+                        : "active:scale-95"
+                    }`}
                     key={item.id}
-                    onDragStart={() => handleDragStart(item, "left")}
+                    onTouchStart={(e) => handleTouchStart(item, "left", e)}
                     role="option"
                     tabIndex={0}
                   >
@@ -154,8 +217,7 @@ export default function HapticPage() {
             <div
               aria-label="Done column"
               className="min-h-[200px] rounded-lg border-2 border-gray-300 border-dashed bg-gray-50 p-3 dark:border-gray-600 dark:bg-gray-900"
-              onDragOver={handleDragOver}
-              onDrop={() => handleDrop("right")}
+              ref={rightColumnRef}
               role="listbox"
             >
               <h3 className="mb-3 font-medium text-gray-600 text-sm dark:text-gray-400">
@@ -165,10 +227,13 @@ export default function HapticPage() {
                 {kanban.right.map((item) => (
                   <div
                     aria-label={item.title}
-                    className="cursor-grab rounded-md bg-white p-3 shadow-sm transition-shadow hover:shadow-md active:cursor-grabbing dark:bg-gray-800"
-                    draggable
+                    className={`touch-none select-none rounded-md bg-white p-3 shadow-sm transition-all dark:bg-gray-800 ${
+                      dragState?.item.id === item.id
+                        ? "opacity-50"
+                        : "active:scale-95"
+                    }`}
                     key={item.id}
-                    onDragStart={() => handleDragStart(item, "right")}
+                    onTouchStart={(e) => handleTouchStart(item, "right", e)}
                     role="option"
                     tabIndex={0}
                   >
@@ -209,4 +274,8 @@ export default function HapticPage() {
       </div>
     </div>
   );
+}
+
+function isPointInRect(x: number, y: number, rect: DOMRect): boolean {
+  return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
 }
