@@ -24,6 +24,7 @@ interface DragState {
   currentX: number;
   currentY: number;
   isDragging: boolean;
+  pointerId: number;
 }
 
 const DRAG_THRESHOLD = 15;
@@ -68,79 +69,88 @@ export function DragKanban({ onHaptic }: DragKanbanProps) {
     });
   };
 
-  const handleTouchStart = (
-    e: React.TouchEvent,
+  const handlePointerDown = (
+    e: React.PointerEvent<HTMLDivElement>,
     item: KanbanItem,
     from: "left" | "right"
   ) => {
-    const touch = e.touches[0];
-    setDragState({
-      item,
-      from,
-      startX: touch.clientX,
-      startY: touch.clientY,
-      currentX: touch.clientX,
-      currentY: touch.clientY,
-      isDragging: false,
-    });
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!dragState) {
+    if (!e.isPrimary) {
       return;
     }
 
-    const touch = e.touches[0];
-    const deltaX = touch.clientX - dragState.startX;
-    const deltaY = touch.clientY - dragState.startY;
+    e.currentTarget.setPointerCapture(e.pointerId);
+    setDragState({
+      item,
+      from,
+      startX: e.clientX,
+      startY: e.clientY,
+      currentX: e.clientX,
+      currentY: e.clientY,
+      isDragging: false,
+      pointerId: e.pointerId,
+    });
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!dragState || e.pointerId !== dragState.pointerId) {
+      return;
+    }
+
+    const deltaX = e.clientX - dragState.startX;
+    const deltaY = e.clientY - dragState.startY;
     const distance = Math.hypot(deltaX, deltaY);
 
-    // ドラッグ開始判定
     if (!dragState.isDragging && distance > DRAG_THRESHOLD) {
       setDragState((prev) =>
         prev
           ? {
               ...prev,
               isDragging: true,
-              currentX: touch.clientX,
-              currentY: touch.clientY,
+              currentX: e.clientX,
+              currentY: e.clientY,
             }
           : null
       );
-      // ドラッグ開始時にスクロールを防止
       e.preventDefault();
-    } else if (dragState.isDragging) {
-      setDragState((prev) =>
-        prev
-          ? { ...prev, currentX: touch.clientX, currentY: touch.clientY }
-          : null
-      );
-      e.preventDefault();
-    }
-  };
-
-  const handleTouchEnd = () => {
-    if (!dragState) {
       return;
     }
 
     if (dragState.isDragging) {
-      // ドラッグ完了 - ドロップ先を判定
-      const dropTarget = getDropTarget(dragState.currentX);
+      setDragState((prev) =>
+        prev ? { ...prev, currentX: e.clientX, currentY: e.clientY } : null
+      );
+      e.preventDefault();
+    }
+  };
+
+  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!dragState || e.pointerId !== dragState.pointerId) {
+      return;
+    }
+
+    if (dragState.isDragging) {
+      const dropTarget = getDropTarget(e.clientX);
       if (dropTarget && dropTarget !== dragState.from) {
         moveItem(dragState.from, dropTarget, dragState.item);
-        onHaptic(); // ドロップ成功時にhaptic
+        onHaptic();
       }
     } else {
-      // タップ（移動なし） - hapticのみ発火
       onHaptic();
     }
 
+    if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    }
     setDragState(null);
   };
 
-  const handleTouchCancel = () => {
-    setDragState(null);
+  const handlePointerCancel = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (dragState && e.pointerId === dragState.pointerId) {
+      if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+        e.currentTarget.releasePointerCapture(e.pointerId);
+      }
+      setDragState(null);
+    }
   };
 
   const renderItem = (item: KanbanItem, from: "left" | "right") => {
@@ -155,10 +165,10 @@ export function DragKanban({ onHaptic }: DragKanbanProps) {
             : "bg-white active:scale-95 dark:bg-gray-800"
         }`}
         key={item.id}
-        onTouchCancel={handleTouchCancel}
-        onTouchEnd={handleTouchEnd}
-        onTouchMove={handleTouchMove}
-        onTouchStart={(e) => handleTouchStart(e, item, from)}
+        onPointerCancel={handlePointerCancel}
+        onPointerDown={(e) => handlePointerDown(e, item, from)}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
         style={{
           touchAction: "pan-y", // 縦スクロールは許可、横スクロールはドラッグ用
         }}
