@@ -13,6 +13,18 @@
     "./db": {
       "types": "./src/db/client.ts",
       "default": "./src/db/client.ts"
+    },
+    "./push/subscription-store": {
+      "types": "./src/push/subscription-store.ts",
+      "default": "./src/push/subscription-store.ts"
+    },
+    "./push/keys": {
+      "types": "./src/push/keys.ts",
+      "default": "./src/push/keys.ts"
+    },
+    "./push/cron": {
+      "types": "./src/push/cron.ts",
+      "default": "./src/push/cron.ts"
     }
   },
   "scripts": {
