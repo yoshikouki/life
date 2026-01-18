@@ -1,5 +1,45 @@
 # News RSS 更新の Web Push 通知 実装計画
 
+## 実装完了 ✅
+
+| ステップ | 項目 | 状態 |
+|---------|------|------|
+| 1 | 基盤整備 | ✅ 完了 |
+| 2 | 永続ストア | ✅ 完了 |
+| 3 | 差分検知 | ✅ 完了 |
+| 4 | Push 送信ロジック | ✅ 完了 |
+| 5 | Service Worker | ✅ 完了 |
+| 6 | 購読 UI | ✅ 完了 |
+| 7 | Cron 連携 | ✅ 完了 |
+| 8 | テスト/検証 | ✅ 完了 |
+
+### 実装済みファイル
+
+**packages/news/src/**
+- `db/schema.ts` - subscriptions, notifiedItems テーブル
+- `db/client.ts` - Drizzle + Turso クライアント
+- `push/keys.ts` - VAPID キー管理
+- `push/subscription-store.ts` - 購読 CRUD
+- `push/notification-store.ts` - 通知済み記録
+- `push/diff.ts` - 差分検知
+- `push/sender.ts` - Push 送信
+- `push/cron.ts` - Cron ジョブ
+
+**src/app/news/**
+- `notifications/subscriptions/route.ts` - 購読 API
+- `notifications/public-key/route.ts` - 公開鍵 API
+- `notifications/cron/route.ts` - Cron エンドポイント
+- `sw.js/route.ts` - Service Worker
+- `_components/notification-subscribe.tsx` - 購読 UI
+
+**.github/workflows/**
+- `news-cron.yml` - 30分ごとの定期実行
+
+### テスト (66 tests)
+- `packages/news/src/push/*.test.ts` - 全モジュールのユニットテスト
+
+---
+
 ## 目的
 
 - `packages/news/src/sources.ts` の RSS が更新されたら Web Push Notification で通知する
