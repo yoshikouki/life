@@ -46,9 +46,9 @@
 
 ### `src/app/news/`
 
-- `push/subscribe/route.ts`: 購読登録 API
-- `push/unsubscribe/route.ts`: 購読解除 API
-- `push/cron/route.ts`: Cron エンドポイント
+- `notifications/subscriptions/route.ts`: 購読登録/解除 API
+- `notifications/cron/route.ts`: Cron エンドポイント
+- `notifications/public-key/route.ts`: 公開鍵配布 API
 - `sw.js/route.ts` or `public/news/sw.js`: Service Worker
 - `/news` UI で購読状態の表示・操作
 
@@ -78,7 +78,7 @@
    - 登録/解除ボタン
    - 登録済み時の状態表示
 7. **Cron 連携**
-   - `GET /news/push/cron` で実行（秘密トークン保護）
+   - `GET /news/notifications/cron` で実行（秘密トークン保護）
    - GitHub Actions の `schedule` から叩く
    - 失敗時はログ/メトリクスに残す
 8. **テスト/検証**
@@ -105,7 +105,7 @@
 - **保管先**: GitHub Actions / デプロイ環境の Secrets に保存（`.env` はローカルのみ）
 - **環境分離**: `dev` / `prod` で鍵を分ける（混在すると購読が無効化される）
 - **ローテーション**: 鍵を更新すると既存購読は無効化 → 再購読が必要
-- **配布方法**: 公開鍵は `GET /news/push/public-key` で配布 or ビルド時に注入
+- **配布方法**: 公開鍵は `GET /news/notifications/public-key` で配布 or ビルド時に注入
 - **通知メタ**: `subject`（連絡先）を環境変数で管理（例: `mailto:`）
 
 ## 参考タスク（あとで必要になりそう）
