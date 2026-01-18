@@ -22,6 +22,7 @@ export const SlideUp = ({
         duration: 0.2,
         ...repeatOption,
       }}
+      viewport={{ once: !repeat }}
       whileInView={{ opacity: 1, y: 0 }}
     >
       {children}
