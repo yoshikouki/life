@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { SlideUp } from "@/components/animation/slide-up";
 import { Typing } from "@/components/animation/typing";
 import { HeaderContainer, HeaderLogo, HeaderNav } from "@/components/header";
+import { NotificationSubscribe } from "./_components/notification-subscribe";
 
 const SKELETON_IDS = ["sk-1", "sk-2", "sk-3", "sk-4", "sk-5"] as const;
 
@@ -17,9 +18,12 @@ export default function NewsPage() {
 
       <main className="flex flex-col items-center justify-items-center gap-16 pt-10">
         <section className="flex w-full max-w-2xl flex-col gap-8 px-4">
-          <h2 className="font-black text-6xl">
-            <Typing cursorClassName="ml-1 h-14">News</Typing>
-          </h2>
+          <div className="flex items-end justify-between gap-4">
+            <h2 className="font-black text-6xl">
+              <Typing cursorClassName="ml-1 h-14">News</Typing>
+            </h2>
+            <NotificationSubscribe />
+          </div>
 
           <Suspense fallback={<NewsFeedSkeleton />}>
             <NewsFeedList />
