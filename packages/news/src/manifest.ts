@@ -1,7 +1,9 @@
+import type { WebAppManifest } from "web-app-manifest";
+
 /**
  * PWA manifest for /news
  */
-export const newsManifest = {
+export const newsManifest: WebAppManifest = {
   name: "News - yoshikouki",
   short_name: "News",
   description: "RSS feed updates",
@@ -21,6 +23,4 @@ export const newsManifest = {
       type: "image/webp",
     },
   ],
-} as const;
-
-export type NewsManifest = typeof newsManifest;
+};

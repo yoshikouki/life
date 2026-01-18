@@ -16,5 +16,8 @@
   },
   "peerDependencies": {
     "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/web-app-manifest": "^1.0.9"
   }
 }
