@@ -26,7 +26,7 @@ export default async function NewsPage() {
 
           <div className="grid grid-cols-1 gap-6">
             {newsItems.map((item: NewsItem) => (
-              <SlideUp key={item.id}>
+              <SlideUp key={`${item.source.id}-${item.id}`}>
                 <article className="space-y-2 border-b pb-4">
                   <a
                     className="hover:underline"

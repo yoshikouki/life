@@ -46,13 +46,23 @@ export async function fetchFeeds(sources: NewsSource[]): Promise<NewsFeed[]> {
 }
 
 /**
- * 複数のフィードを統合してアイテムを日付順にソート
+ * 複数のフィードを統合してアイテムを日付順にソート（重複除去）
  */
 export async function fetchAllNews(sources: NewsSource[]): Promise<NewsItem[]> {
   const feeds = await fetchFeeds(sources);
   const allItems = feeds.flatMap((feed) => feed.items);
 
-  return allItems.sort(
+  // URL ベースで重複除去（最初に見つかったものを優先）
+  const seen = new Set<string>();
+  const uniqueItems = allItems.filter((item) => {
+    if (seen.has(item.url)) {
+      return false;
+    }
+    seen.add(item.url);
+    return true;
+  });
+
+  return uniqueItems.sort(
     (a, b) => b.publishedAt.getTime() - a.publishedAt.getTime()
   );
 }
