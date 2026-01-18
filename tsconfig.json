@@ -18,7 +18,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@life/news": ["./packages/news/src/index.ts"],
+      "@life/news/*": ["./packages/news/src/*"]
     },
     "target": "ES2017"
   },
@@ -27,7 +29,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts",
+    "packages/**/*.ts",
+    "packages/**/*.tsx"
   ],
   "exclude": ["node_modules"]
 }

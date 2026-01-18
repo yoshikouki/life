@@ -2,6 +2,9 @@
   "name": "life",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "dev": "bun --bun x next dev --turbo",
     "build": "bun --bun x next build",
@@ -13,6 +16,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@life/news": "workspace:*",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.562.0",
