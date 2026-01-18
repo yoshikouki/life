@@ -108,6 +108,17 @@
 - **配布方法**: 公開鍵は `GET /news/notifications/public-key` で配布 or ビルド時に注入
 - **通知メタ**: `subject`（連絡先）を環境変数で管理（例: `mailto:`）
 
+## 環境変数 / Secrets（案）
+
+- `TURSO_DATABASE_URL`: libSQL 接続 URL
+- `TURSO_AUTH_TOKEN`: Turso auth token
+- `NEWS_NOTIFICATIONS_VAPID_PUBLIC_KEY`: VAPID 公開鍵（API で配布）
+- `NEWS_NOTIFICATIONS_VAPID_PRIVATE_KEY`: VAPID 秘密鍵（署名専用）
+- `NEWS_NOTIFICATIONS_SUBJECT`: VAPID subject（`mailto:` or URL）
+- `NEWS_NOTIFICATIONS_CRON_SECRET`: Cron エンドポイント保護用トークン
+- `NEWS_NOTIFICATIONS_ICON_URL`（任意）: 通知アイコン
+- `NEWS_NOTIFICATIONS_BADGE_URL`（任意）: 通知バッジ
+
 ## 参考タスク（あとで必要になりそう）
 
 - 通知頻度の制御（まとめ通知・時間帯制限）
