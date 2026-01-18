@@ -1,6 +1,7 @@
 import { eq, inArray, lt } from "drizzle-orm";
 import type { Database } from "../db/client";
 import { notifiedItems } from "../db/schema";
+import { DatabaseError } from "../errors";
 
 export interface NotificationItem {
   itemUrl: string;
@@ -19,16 +20,20 @@ export async function markAsNotified(
     return;
   }
 
-  await db
-    .insert(notifiedItems)
-    .values(
-      items.map((item) => ({
-        itemUrl: item.itemUrl,
-        sourceId: item.sourceId,
-        publishedAt: item.publishedAt,
-      }))
-    )
-    .onConflictDoNothing();
+  try {
+    await db
+      .insert(notifiedItems)
+      .values(
+        items.map((item) => ({
+          itemUrl: item.itemUrl,
+          sourceId: item.sourceId,
+          publishedAt: item.publishedAt,
+        }))
+      )
+      .onConflictDoNothing();
+  } catch (error) {
+    throw new DatabaseError("Failed to mark items as notified", error);
+  }
 }
 
 /**
@@ -38,13 +43,17 @@ export async function isAlreadyNotified(
   db: Database,
   itemUrl: string
 ): Promise<boolean> {
-  const result = await db
-    .select({ itemUrl: notifiedItems.itemUrl })
-    .from(notifiedItems)
-    .where(eq(notifiedItems.itemUrl, itemUrl))
-    .limit(1);
+  try {
+    const result = await db
+      .select({ itemUrl: notifiedItems.itemUrl })
+      .from(notifiedItems)
+      .where(eq(notifiedItems.itemUrl, itemUrl))
+      .limit(1);
 
-  return result.length > 0;
+    return result.length > 0;
+  } catch (error) {
+    throw new DatabaseError("Failed to check notification status", error);
+  }
 }
 
 /**
@@ -58,12 +67,16 @@ export async function getNotifiedUrls(
     return [];
   }
 
-  const result = await db
-    .select({ itemUrl: notifiedItems.itemUrl })
-    .from(notifiedItems)
-    .where(inArray(notifiedItems.itemUrl, urls));
+  try {
+    const result = await db
+      .select({ itemUrl: notifiedItems.itemUrl })
+      .from(notifiedItems)
+      .where(inArray(notifiedItems.itemUrl, urls));
 
-  return result.map((r) => r.itemUrl);
+    return result.map((r) => r.itemUrl);
+  } catch (error) {
+    throw new DatabaseError("Failed to fetch notified URLs", error);
+  }
 }
 
 /**
@@ -73,10 +86,14 @@ export async function cleanupOldNotifications(
   db: Database,
   olderThan: Date
 ): Promise<number> {
-  const result = await db
-    .delete(notifiedItems)
-    .where(lt(notifiedItems.notifiedAt, olderThan))
-    .returning({ itemUrl: notifiedItems.itemUrl });
+  try {
+    const result = await db
+      .delete(notifiedItems)
+      .where(lt(notifiedItems.notifiedAt, olderThan))
+      .returning({ itemUrl: notifiedItems.itemUrl });
 
-  return result.length;
+    return result.length;
+  } catch (error) {
+    throw new DatabaseError("Failed to cleanup old notifications", error);
+  }
 }

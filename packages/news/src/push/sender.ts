@@ -91,6 +91,7 @@ function isSubscriptionGone(statusCode?: number): boolean {
 
 /**
  * 複数の購読に一括で通知を送信
+ * 注意: 引数の subscriptions 配列は変更されません
  */
 export async function sendNotifications(
   db: Database,
@@ -103,11 +104,21 @@ export async function sendNotifications(
   let failureCount = 0;
   let deletedCount = 0;
 
+  // 削除済み購読を追跡（配列を変更しない）
+  const deletedEndpoints = new Set<string>();
+
   for (const item of items) {
     const payload = buildNotificationPayload(item);
 
+    // 削除済みの購読を除外して送信
+    const activeSubscriptions = subscriptions.filter(
+      (sub) => !deletedEndpoints.has(sub.endpoint)
+    );
+
     const sendResults = await Promise.all(
-      subscriptions.map((sub) => sendNotification(sub, payload, vapidKeys))
+      activeSubscriptions.map((sub) =>
+        sendNotification(sub, payload, vapidKeys)
+      )
     );
 
     for (const result of sendResults) {
@@ -122,13 +133,7 @@ export async function sendNotifications(
         if (isSubscriptionGone(result.statusCode)) {
           await deleteSubscription(db, result.endpoint);
           deletedCount++;
-          // 削除された購読を subscriptions から除去
-          const index = subscriptions.findIndex(
-            (s) => s.endpoint === result.endpoint
-          );
-          if (index !== -1) {
-            subscriptions.splice(index, 1);
-          }
+          deletedEndpoints.add(result.endpoint);
         }
       }
     }
