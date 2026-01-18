@@ -2,6 +2,9 @@
  * VAPID キーの取得・検証ロジック
  */
 
+// Base64 URL 文字セットの正規表現
+const BASE64_URL_PATTERN = /^[A-Za-z0-9_-]+$/;
+
 export interface VapidKeys {
   publicKey: string;
   privateKey: string;
@@ -71,13 +74,10 @@ export function validateVapidKeys(keys: VapidKeys): {
 } {
   const errors: string[] = [];
 
-  // Base64 URL 文字セットの正規表現
-  const base64UrlPattern = /^[A-Za-z0-9_-]+$/;
-
   // 公開鍵の検証 (87文字: 65バイト -> Base64で約87文字)
   if (!keys.publicKey) {
     errors.push("Public key is empty");
-  } else if (!base64UrlPattern.test(keys.publicKey)) {
+  } else if (!BASE64_URL_PATTERN.test(keys.publicKey)) {
     errors.push("Public key contains invalid characters");
   } else if (keys.publicKey.length < 80 || keys.publicKey.length > 90) {
     errors.push(
@@ -88,7 +88,7 @@ export function validateVapidKeys(keys: VapidKeys): {
   // 秘密鍵の検証 (43文字: 32バイト -> Base64で約43文字)
   if (!keys.privateKey) {
     errors.push("Private key is empty");
-  } else if (!base64UrlPattern.test(keys.privateKey)) {
+  } else if (!BASE64_URL_PATTERN.test(keys.privateKey)) {
     errors.push("Private key contains invalid characters");
   } else if (keys.privateKey.length < 40 || keys.privateKey.length > 50) {
     errors.push(

@@ -15,7 +15,9 @@ export async function markAsNotified(
   db: Database,
   items: NotificationItem[]
 ): Promise<void> {
-  if (items.length === 0) return;
+  if (items.length === 0) {
+    return;
+  }
 
   await db
     .insert(notifiedItems)
@@ -52,7 +54,9 @@ export async function getNotifiedUrls(
   db: Database,
   urls: string[]
 ): Promise<string[]> {
-  if (urls.length === 0) return [];
+  if (urls.length === 0) {
+    return [];
+  }
 
   const result = await db
     .select({ itemUrl: notifiedItems.itemUrl })

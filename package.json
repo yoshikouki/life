@@ -9,6 +9,8 @@
     "dev": "bun --bun x next dev --turbo",
     "build": "bun --bun x next build",
     "start": "bun --bun x next start",
+    "test": "vitest",
+    "test:run": "vitest run",
     "lint": "bunx ultracite check",
     "format": "bunx ultracite fix",
     "format:unsafe": "bunx ultracite fix --unsafe=true .",
@@ -42,7 +44,8 @@
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3",
-    "ultracite": "7.0.11"
+    "ultracite": "7.0.11",
+    "vitest": "^4.0.17"
   },
   "overrides": {
     "@types/react": "19.2.7",

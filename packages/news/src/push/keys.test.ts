@@ -17,9 +17,9 @@ describe("keys", () => {
 
   beforeEach(() => {
     // 環境変数をクリア
-    delete process.env.NEWS_NOTIFICATIONS_VAPID_PUBLIC_KEY;
-    delete process.env.NEWS_NOTIFICATIONS_VAPID_PRIVATE_KEY;
-    delete process.env.NEWS_NOTIFICATIONS_SUBJECT;
+    process.env.NEWS_NOTIFICATIONS_VAPID_PUBLIC_KEY = undefined;
+    process.env.NEWS_NOTIFICATIONS_VAPID_PRIVATE_KEY = undefined;
+    process.env.NEWS_NOTIFICATIONS_SUBJECT = undefined;
   });
 
   afterEach(() => {
@@ -45,7 +45,7 @@ describe("keys", () => {
     it("公開鍵が未設定の場合、エラーをスローする", () => {
       process.env.NEWS_NOTIFICATIONS_VAPID_PRIVATE_KEY = VALID_PRIVATE_KEY;
       process.env.NEWS_NOTIFICATIONS_SUBJECT = VALID_SUBJECT;
-      delete process.env.NEWS_NOTIFICATIONS_VAPID_PUBLIC_KEY;
+      process.env.NEWS_NOTIFICATIONS_VAPID_PUBLIC_KEY = undefined;
 
       expect(() => getVapidKeys()).toThrow(VapidKeyError);
       expect(() => getVapidKeys()).toThrow(
@@ -56,7 +56,7 @@ describe("keys", () => {
     it("秘密鍵が未設定の場合、エラーをスローする", () => {
       process.env.NEWS_NOTIFICATIONS_VAPID_PUBLIC_KEY = VALID_PUBLIC_KEY;
       process.env.NEWS_NOTIFICATIONS_SUBJECT = VALID_SUBJECT;
-      delete process.env.NEWS_NOTIFICATIONS_VAPID_PRIVATE_KEY;
+      process.env.NEWS_NOTIFICATIONS_VAPID_PRIVATE_KEY = undefined;
 
       expect(() => getVapidKeys()).toThrow(VapidKeyError);
       expect(() => getVapidKeys()).toThrow(
@@ -67,7 +67,7 @@ describe("keys", () => {
     it("subject が未設定の場合、エラーをスローする", () => {
       process.env.NEWS_NOTIFICATIONS_VAPID_PUBLIC_KEY = VALID_PUBLIC_KEY;
       process.env.NEWS_NOTIFICATIONS_VAPID_PRIVATE_KEY = VALID_PRIVATE_KEY;
-      delete process.env.NEWS_NOTIFICATIONS_SUBJECT;
+      process.env.NEWS_NOTIFICATIONS_SUBJECT = undefined;
 
       expect(() => getVapidKeys()).toThrow(VapidKeyError);
       expect(() => getVapidKeys()).toThrow(
@@ -86,7 +86,7 @@ describe("keys", () => {
     });
 
     it("公開鍵が未設定の場合、エラーをスローする", () => {
-      delete process.env.NEWS_NOTIFICATIONS_VAPID_PUBLIC_KEY;
+      process.env.NEWS_NOTIFICATIONS_VAPID_PUBLIC_KEY = undefined;
 
       expect(() => getVapidPublicKey()).toThrow(VapidKeyError);
       expect(() => getVapidPublicKey()).toThrow(

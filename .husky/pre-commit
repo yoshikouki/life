@@ -1,4 +1,4 @@
-bun test
+bun run test:run
 
 #!/bin/sh
 # Exit on any error

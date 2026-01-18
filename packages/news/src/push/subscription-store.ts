@@ -35,7 +35,7 @@ export async function deleteSubscription(
   await db.delete(subscriptions).where(eq(subscriptions.endpoint, endpoint));
 }
 
-export async function getAllSubscriptions(db: Database) {
+export function getAllSubscriptions(db: Database) {
   return db.select().from(subscriptions);
 }
 

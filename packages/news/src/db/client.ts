@@ -1,19 +1,36 @@
 import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
+import { notifiedItems, subscriptions } from "./schema";
 
-// TODO: Import schema once defined
-// import * as schema from "./schema";
+export type Database = ReturnType<typeof createDatabase>;
 
-const databaseUrl = process.env.TURSO_DATABASE_URL;
-if (!databaseUrl) {
-  throw new Error("TURSO_DATABASE_URL is required");
+export function createDatabase(url: string, authToken?: string) {
+  const client = createClient({
+    url,
+    authToken,
+  });
+  return drizzle(client, { schema: { notifiedItems, subscriptions } });
 }
 
-const client = createClient({
-  url: databaseUrl,
-  authToken: process.env.TURSO_AUTH_TOKEN,
-});
+let _db: Database | null = null;
 
-// TODO: Add schema to drizzle() call once defined
-// export const db = drizzle(client, { schema });
-export const db = drizzle(client);
+export function getDatabase(): Database {
+  if (_db) {
+    return _db;
+  }
+
+  const databaseUrl = process.env.TURSO_DATABASE_URL;
+  if (!databaseUrl) {
+    throw new Error("TURSO_DATABASE_URL is required");
+  }
+
+  _db = createDatabase(databaseUrl, process.env.TURSO_AUTH_TOKEN);
+  return _db;
+}
+
+// For backwards compatibility
+export const db = new Proxy({} as Database, {
+  get(_, prop) {
+    return getDatabase()[prop as keyof Database];
+  },
+});
