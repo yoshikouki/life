@@ -8,6 +8,7 @@
         "@life/news": "workspace:*",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
+        "kiso.css": "^1.2.3",
         "lucide-react": "^0.562.0",
         "motion": "^12.23.26",
         "next": "16.1.1",
@@ -678,6 +679,8 @@
     "jsx-ast-utils": ["jsx-ast-utils@3.3.5", "", { "dependencies": { "array-includes": "^3.1.6", "array.prototype.flat": "^1.3.1", "object.assign": "^4.1.4", "object.values": "^1.1.6" } }, "sha512-ZZow9HBI5O6EPgSJLUb8n2NKgmVWTwCvHGwFuJlMjvLFqlGG6pjirPhtdsseaLZjSibD8eegzmYpUZwoIlj2cQ=="],
 
     "keyv": ["keyv@4.5.4", "", { "dependencies": { "json-buffer": "3.0.1" } }, "sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw=="],
+
+    "kiso.css": ["kiso.css@1.2.3", "", {}, "sha512-uZDh1/nhfMz1P29JWXMpS8W3K1LymS362Jeu24RDGJPn0mcLqApC0GwWgifs2bUHQb8wjjNuC+2Hbe5ql4dLQA=="],
 
     "language-subtag-registry": ["language-subtag-registry@0.3.23", "", {}, "sha512-0K65Lea881pHotoGEa5gDlMxt3pctLi2RplBb7Ezh4rRdLEOtgi7n4EwK9lamnUCkKBqaeKRVebTq6BAxSkpXQ=="],
 
