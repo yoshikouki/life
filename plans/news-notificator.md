@@ -25,15 +25,12 @@
 - **スケジューリング**: Cron で定期実行（デプロイ環境の Cron に合わせる）
 - **保存先**: サーバー環境に合わせて選定（下記の決定ポイント参照）
 
-## 決定ポイント（最初に確定させる）
+## 決定ポイント（確定済み）
 
-1. **永続ストア**
-   - 候補: SQLite（ローカル/単一ホスト）, Vercel KV, Upstash Redis
-   - 期待条件: 書き込み頻度は低め・読み書きは単純・サーバレスでも永続化可能
-2. **Cron 実行基盤**
-   - 候補: Vercel Cron / GitHub Actions / ローカル cron
-3. **Web Push ライブラリ**
-   - 候補: `web-push`（標準的な VAPID 実装）
+1. **永続ストア**: Turso（libSQL）
+2. **ORM**: Drizzle
+3. **Cron 実行基盤**: GitHub Actions
+4. **Web Push ライブラリ**: `web-push`
 
 ## 追加するモジュール（案）
 
@@ -45,6 +42,7 @@
 - `push/sender.ts`: Web Push 送信処理
 - `push/diff.ts`: 新規アイテム抽出（差分検知）
 - `push/cron.ts`: RSS 更新取得 → 差分抽出 → 送信
+- `db/` もしくは `storage/`: Drizzle schema / クライアント初期化
 
 ### `src/app/news/`
 
@@ -59,9 +57,11 @@
 1. **基盤整備**
    - VAPID key 生成スクリプト/手順を用意
    - `.env` 追加（公開鍵/秘密鍵/通知アイコン URL など）
+   - Drizzle 設定（config・migrations）
 2. **永続ストアの実装**
    - `Subscription` テーブル/コレクション: `endpoint`, `keys`, `createdAt`, `updatedAt`, `expiresAt?`
    - `NotifiedItem` テーブル/コレクション: `itemUrl`, `sourceId`, `publishedAt`, `notifiedAt`
+   - Turso 接続情報の管理（URL / auth token）
 3. **差分検知**
    - `fetchAllNews` の結果から新規アイテムのみ抽出
    - 送信済みログにないものだけ通知対象にする
@@ -79,6 +79,7 @@
    - 登録済み時の状態表示
 7. **Cron 連携**
    - `GET /news/push/cron` で実行（秘密トークン保護）
+   - GitHub Actions の `schedule` から叩く
    - 失敗時はログ/メトリクスに残す
 8. **テスト/検証**
    - 差分検知ユーティリティの単体テスト
@@ -97,6 +98,15 @@
 - Safari の Web Push 対応条件（iOS は PWA インストール必須）
 - サーバレス環境での永続化選定ミス
 - RSS 側の `pubDate` 不整合に備え、`id/url` を主キーにする
+
+## VAPID キー管理方針（判断材料）
+
+- **鍵の役割**: 公開鍵はクライアント配布、秘密鍵はサーバーで署名にのみ使用
+- **保管先**: GitHub Actions / デプロイ環境の Secrets に保存（`.env` はローカルのみ）
+- **環境分離**: `dev` / `prod` で鍵を分ける（混在すると購読が無効化される）
+- **ローテーション**: 鍵を更新すると既存購読は無効化 → 再購読が必要
+- **配布方法**: 公開鍵は `GET /news/push/public-key` で配布 or ビルド時に注入
+- **通知メタ**: `subject`（連絡先）を環境変数で管理（例: `mailto:`）
 
 ## 参考タスク（あとで必要になりそう）
 
