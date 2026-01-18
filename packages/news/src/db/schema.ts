@@ -17,14 +17,14 @@ export const subscriptions = sqliteTable("news_subscriptions", {
   updatedAt: integer("updated_at", { mode: "timestamp_ms" })
     .notNull()
     .default(now)
-    .$onUpdate(() => new Date()),
+    .$onUpdate(() => now),
   expiresAt: integer("expires_at", { mode: "timestamp_ms" }),
 });
 
 export const notifiedItems = sqliteTable("news_notified_items", {
   itemUrl: text("item_url").primaryKey(),
   sourceId: text("source_id").notNull(),
-  publishedAt: integer("published_at", { mode: "timestamp_ms" }).notNull(),
+  publishedAt: integer("published_at", { mode: "timestamp_ms" }),
   notifiedAt: integer("notified_at", { mode: "timestamp_ms" })
     .notNull()
     .default(now),
