@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import {
   getVapidKeys,
   getVapidPublicKey,
@@ -13,15 +13,18 @@ const VALID_PRIVATE_KEY = "1234567890abcdef1234567890abcdef12345678901";
 const VALID_SUBJECT = "mailto:test@example.com";
 
 describe("keys", () => {
-  const originalEnv = process.env;
+  const originalEnv = { ...process.env };
 
   beforeEach(() => {
-    vi.resetModules();
-    process.env = { ...originalEnv };
+    // 環境変数をクリア
+    delete process.env.NEWS_NOTIFICATIONS_VAPID_PUBLIC_KEY;
+    delete process.env.NEWS_NOTIFICATIONS_VAPID_PRIVATE_KEY;
+    delete process.env.NEWS_NOTIFICATIONS_SUBJECT;
   });
 
   afterEach(() => {
-    process.env = originalEnv;
+    // 環境変数を復元
+    process.env = { ...originalEnv };
   });
 
   describe("getVapidKeys", () => {

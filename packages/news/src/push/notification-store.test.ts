@@ -1,5 +1,5 @@
-import { afterEach, beforeEach, describe, expect, it } from "bun:test";
 import { sql } from "drizzle-orm";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { createDatabase, type Database } from "../db/client";
 import { notifiedItems } from "../db/schema";
 import {
