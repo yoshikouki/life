@@ -1,17 +1,25 @@
 # /news ページ
 
+## 設計方針
+
+**`@life/news` パッケージがフィード取得から通知まで全てを担当する。**
+
 ## 構成
 
-- **`packages/news/`** (`@life/news`) - コアロジック（RSS フェッチ、パース、型定義）
-- **`src/app/news/`** - UI 層（ページ、レイアウト、PWA manifest）
+### `packages/news/` (`@life/news`)
+- `fetcher.ts` - RSS フェッチ、パース
+- `sources.ts` - 購読フィード一覧
+- `manifest.ts` - PWA manifest 定義
+- `types.ts` - 型定義
 
-## PWA 対応
-
-- `manifest.json/route.ts` - `/news/manifest.json` を返す Route Handler
-- `layout.tsx` - manifest へのリンクを `<head>` に追加
-- `start_url: "/news"` で /news 専用の PWA として動作
+### `src/app/news/` (UI層・ルーティング)
+- `page.tsx` - ニュース一覧ページ
+- `layout.tsx` - manifest リンク追加
+- `manifest.json/route.ts` - @life/news の manifest を返す
 
 ## 将来の拡張
 
-- Service Worker の追加
-- Push Notification による RSS 更新通知
+`@life/news` に追加予定：
+- Service Worker 設定
+- Push Notification ロジック
+- 更新検知・差分通知
