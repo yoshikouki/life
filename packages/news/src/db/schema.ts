@@ -1,7 +1,7 @@
 import { sql } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
-const now = sql`(cast((julianday('now') - 2440587.5) * 86400000 as integer))`;
+const now = sql`(unixepoch('now') * 1000)`;
 
 export interface PushSubscriptionKeys {
   p256dh: string;
