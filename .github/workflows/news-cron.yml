@@ -1,0 +1,40 @@
+name: News Notifications Cron
+
+on:
+  schedule:
+    # Run every 30 minutes
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+    inputs:
+      debug:
+        description: "Enable debug logging"
+        required: false
+        default: "false"
+
+jobs:
+  send-notifications:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      CRON_SECRET: ${{ secrets.NEWS_NOTIFICATIONS_CRON_SECRET }}
+      SITE_URL: ${{ secrets.SITE_URL }}
+    steps:
+      - name: Trigger notification cron
+        run: |
+          response=$(curl -s -w "\n%{http_code}" \
+            -H "Authorization: Bearer $CRON_SECRET" \
+            "$SITE_URL/news/notifications/cron")
+
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+
+          echo "Response: $body"
+          echo "HTTP Code: $http_code"
+
+          if [ "$http_code" != "200" ]; then
+            echo "::error::Cron job failed with HTTP $http_code"
+            exit 1
+          fi
+
+          echo "Cron job completed successfully"
+          echo "$body" | jq .
