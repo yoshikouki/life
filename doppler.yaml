@@ -1,0 +1,4 @@
+setup:
+  - project: yoshikouki-com
+    config: dev
+
