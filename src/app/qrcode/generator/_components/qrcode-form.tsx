@@ -37,6 +37,9 @@ interface QRCodeFormState {
   error: string | null;
 }
 
+const inputClassName =
+  "w-full rounded-lg border border-border bg-input px-4 py-3 text-base text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary";
+
 export function QRCodeForm() {
   const [state, formAction, isPending] = useActionState<
     QRCodeFormState,
@@ -51,7 +54,7 @@ export function QRCodeForm() {
             Content
           </label>
           <input
-            className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
+            className={inputClassName}
             id="data"
             name="data"
             placeholder="https://example.com"
@@ -66,7 +69,7 @@ export function QRCodeForm() {
               Size (px)
             </label>
             <input
-              className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+              className={inputClassName}
               defaultValue={256}
               id="size"
               max={1024}
@@ -81,7 +84,7 @@ export function QRCodeForm() {
               Margin
             </label>
             <input
-              className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+              className={inputClassName}
               defaultValue={4}
               id="margin"
               max={20}
@@ -102,14 +105,14 @@ export function QRCodeForm() {
             </label>
             <div className="flex gap-2">
               <input
-                className="h-12 w-12 cursor-pointer rounded-lg border border-gray-300"
+                className="h-12 w-12 cursor-pointer rounded-lg border border-border"
                 defaultValue="#000000"
                 id="foregroundColor"
                 name="foregroundColor"
                 type="color"
               />
               <input
-                className="flex-1 rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+                className="flex-1 rounded-lg border border-border bg-input px-4 py-3 text-base text-foreground focus:border-primary focus:ring-2 focus:ring-primary"
                 defaultValue="#000000"
                 name="foregroundColorText"
                 pattern="^#[0-9A-Fa-f]{6}$"
@@ -127,14 +130,14 @@ export function QRCodeForm() {
             </label>
             <div className="flex gap-2">
               <input
-                className="h-12 w-12 cursor-pointer rounded-lg border border-gray-300"
+                className="h-12 w-12 cursor-pointer rounded-lg border border-border"
                 defaultValue="#ffffff"
                 id="backgroundColor"
                 name="backgroundColor"
                 type="color"
               />
               <input
-                className="flex-1 rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+                className="flex-1 rounded-lg border border-border bg-input px-4 py-3 text-base text-foreground focus:border-primary focus:ring-2 focus:ring-primary"
                 defaultValue="#ffffff"
                 name="backgroundColorText"
                 pattern="^#[0-9A-Fa-f]{6}$"
@@ -153,7 +156,7 @@ export function QRCodeForm() {
               Module Style
             </label>
             <select
-              className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+              className={inputClassName}
               defaultValue="square"
               id="moduleStyle"
               name="moduleStyle"
@@ -174,7 +177,7 @@ export function QRCodeForm() {
               Corner Style
             </label>
             <select
-              className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+              className={inputClassName}
               defaultValue="square"
               id="cornerStyle"
               name="cornerStyle"
@@ -196,7 +199,7 @@ export function QRCodeForm() {
             Error Correction Level
           </label>
           <select
-            className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+            className={inputClassName}
             defaultValue="M"
             id="errorCorrectionLevel"
             name="errorCorrectionLevel"
@@ -210,7 +213,7 @@ export function QRCodeForm() {
         </div>
 
         <button
-          className="w-full rounded-lg bg-blue-600 px-6 py-3 font-medium text-base text-white transition-colors hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 disabled:opacity-50"
+          className="w-full rounded-lg bg-primary px-6 py-3 font-medium text-base text-primary-foreground transition-colors hover:bg-primary/90 focus:ring-4 focus:ring-ring disabled:opacity-50"
           disabled={isPending}
           type="submit"
         >
@@ -218,21 +221,20 @@ export function QRCodeForm() {
         </button>
       </form>
 
-      <div className="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-gray-50 p-8 dark:border-gray-700 dark:bg-gray-800">
+      <div className="flex flex-col items-center justify-center rounded-lg border border-border bg-card p-8">
         {state.error && (
-          <p className="text-center text-red-500">{state.error}</p>
+          <p className="text-center text-destructive">{state.error}</p>
         )}
         {state.svg ? (
           <div className="space-y-4">
             <div
               className="rounded-lg bg-white p-4 shadow-sm"
-              // biome-ignore lint/security/noDangerouslySetInnerHtml: SVG is generated by our server action from @life/qrcode-generator
               dangerouslySetInnerHTML={{ __html: state.svg }}
             />
             <DownloadButton svg={state.svg} />
           </div>
         ) : (
-          <p className="text-center text-gray-500">
+          <p className="text-center text-muted-foreground">
             Enter content and click Generate to create a QR code
           </p>
         )}
@@ -284,14 +286,14 @@ function DownloadButton({ svg }: { svg: string }) {
   return (
     <div className="flex gap-2">
       <button
-        className="rounded-lg border border-gray-300 bg-white px-4 py-2 font-medium text-gray-900 text-sm transition-colors hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
+        className="rounded-lg border border-border bg-secondary px-4 py-2 font-medium text-secondary-foreground text-sm transition-colors hover:bg-secondary/80"
         onClick={() => handleDownload("svg")}
         type="button"
       >
         Download SVG
       </button>
       <button
-        className="rounded-lg border border-gray-300 bg-white px-4 py-2 font-medium text-gray-900 text-sm transition-colors hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
+        className="rounded-lg border border-border bg-secondary px-4 py-2 font-medium text-secondary-foreground text-sm transition-colors hover:bg-secondary/80"
         onClick={() => handleDownload("png")}
         type="button"
       >
