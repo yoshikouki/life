@@ -20,7 +20,9 @@
     "paths": {
       "@/*": ["./src/*"],
       "@life/news": ["./packages/news/src/index.ts"],
-      "@life/news/*": ["./packages/news/src/*"]
+      "@life/news/*": ["./packages/news/src/*"],
+      "@life/qrcode-generator": ["./packages/qrcode-generator/src/index.ts"],
+      "@life/qrcode-generator/*": ["./packages/qrcode-generator/src/*"]
     },
     "target": "ES2017"
   },

@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@life/news": "workspace:*",
+    "@life/qrcode-generator": "workspace:*",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "kiso.css": "^1.2.3",

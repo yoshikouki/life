@@ -52,5 +52,30 @@
     "ultracite/biome/core",
     "ultracite/biome/next",
     "ultracite/biome/react"
+  ],
+  "overrides": [
+    {
+      "includes": [
+        "packages/*/src/index.ts",
+        "packages/*/src/components/index.ts"
+      ],
+      "linter": {
+        "rules": {
+          "performance": {
+            "noBarrelFile": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["packages/qrcode-generator/**/*.tsx"],
+      "linter": {
+        "rules": {
+          "security": {
+            "noDangerouslySetInnerHtml": "off"
+          }
+        }
+      }
+    }
   ]
 }

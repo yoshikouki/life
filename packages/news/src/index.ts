@@ -1,4 +1,3 @@
-// biome-ignore lint/performance/noBarrelFile: Package entry point
 export { fetchAllNews, fetchFeed, fetchFeeds } from "./fetcher";
 export { newsManifest } from "./manifest";
 export { feedSources } from "./sources";
