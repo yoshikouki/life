@@ -51,7 +51,7 @@ export function QRCodeForm() {
             Content
           </label>
           <input
-            className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800"
+            className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
             id="data"
             name="data"
             placeholder="https://example.com"
@@ -66,7 +66,7 @@ export function QRCodeForm() {
               Size (px)
             </label>
             <input
-              className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800"
+              className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
               defaultValue={256}
               id="size"
               max={1024}
@@ -81,7 +81,7 @@ export function QRCodeForm() {
               Margin
             </label>
             <input
-              className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800"
+              className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
               defaultValue={4}
               id="margin"
               max={20}
@@ -109,7 +109,7 @@ export function QRCodeForm() {
                 type="color"
               />
               <input
-                className="flex-1 rounded-lg border border-gray-300 bg-white px-4 py-3 text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800"
+                className="flex-1 rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
                 defaultValue="#000000"
                 name="foregroundColorText"
                 pattern="^#[0-9A-Fa-f]{6}$"
@@ -134,7 +134,7 @@ export function QRCodeForm() {
                 type="color"
               />
               <input
-                className="flex-1 rounded-lg border border-gray-300 bg-white px-4 py-3 text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800"
+                className="flex-1 rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
                 defaultValue="#ffffff"
                 name="backgroundColorText"
                 pattern="^#[0-9A-Fa-f]{6}$"
@@ -153,7 +153,7 @@ export function QRCodeForm() {
               Module Style
             </label>
             <select
-              className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800"
+              className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
               defaultValue="square"
               id="moduleStyle"
               name="moduleStyle"
@@ -174,7 +174,7 @@ export function QRCodeForm() {
               Corner Style
             </label>
             <select
-              className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800"
+              className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
               defaultValue="square"
               id="cornerStyle"
               name="cornerStyle"
@@ -196,7 +196,7 @@ export function QRCodeForm() {
             Error Correction Level
           </label>
           <select
-            className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800"
+            className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
             defaultValue="M"
             id="errorCorrectionLevel"
             name="errorCorrectionLevel"
@@ -284,14 +284,14 @@ function DownloadButton({ svg }: { svg: string }) {
   return (
     <div className="flex gap-2">
       <button
-        className="rounded-lg border border-gray-300 bg-white px-4 py-2 font-medium text-sm transition-colors hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600"
+        className="rounded-lg border border-gray-300 bg-white px-4 py-2 font-medium text-gray-900 text-sm transition-colors hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
         onClick={() => handleDownload("svg")}
         type="button"
       >
         Download SVG
       </button>
       <button
-        className="rounded-lg border border-gray-300 bg-white px-4 py-2 font-medium text-sm transition-colors hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600"
+        className="rounded-lg border border-gray-300 bg-white px-4 py-2 font-medium text-gray-900 text-sm transition-colors hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
         onClick={() => handleDownload("png")}
         type="button"
       >
