@@ -7,7 +7,7 @@ import type {
 } from "@life/qrcode-generator";
 import { generateQRCode } from "@life/qrcode-generator";
 import { motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 
 const COLOR_PRESETS = [
   { name: "Classic", fg: "#000000", bg: "#ffffff" },
@@ -19,28 +19,164 @@ const COLOR_PRESETS = [
   { name: "Dark", fg: "#ffffff", bg: "#0f172a" },
 ];
 
-const MODULE_STYLES: { value: ModuleStyle; label: string }[] = [
-  { value: "square", label: "Square" },
-  { value: "rounded", label: "Rounded" },
-  { value: "dots", label: "Dots" },
-  { value: "classy", label: "Classy" },
-  { value: "classy-rounded", label: "Classy Rounded" },
+const MODULE_STYLES: {
+  value: ModuleStyle;
+  label: string;
+  icon: ReactNode;
+}[] = [
+  {
+    value: "square",
+    label: "Square",
+    icon: (
+      <div className="grid grid-cols-3 gap-1">
+        <div className="h-2 w-2 bg-current" />
+        <div className="h-2 w-2 bg-current" />
+        <div className="h-2 w-2 bg-current" />
+        <div className="h-2 w-2 bg-current" />
+        <div className="h-2 w-2 bg-current" />
+        <div className="h-2 w-2 bg-current" />
+        <div className="h-2 w-2 bg-current" />
+        <div className="h-2 w-2 bg-current" />
+        <div className="h-2 w-2 bg-current" />
+      </div>
+    ),
+  },
+  {
+    value: "rounded",
+    label: "Rounded",
+    icon: (
+      <div className="grid grid-cols-3 gap-1">
+        <div className="h-2 w-2 rounded-sm bg-current" />
+        <div className="h-2 w-2 rounded-sm bg-current" />
+        <div className="h-2 w-2 rounded-sm bg-current" />
+        <div className="h-2 w-2 rounded-sm bg-current" />
+        <div className="h-2 w-2 rounded-sm bg-current" />
+        <div className="h-2 w-2 rounded-sm bg-current" />
+        <div className="h-2 w-2 rounded-sm bg-current" />
+        <div className="h-2 w-2 rounded-sm bg-current" />
+        <div className="h-2 w-2 rounded-sm bg-current" />
+      </div>
+    ),
+  },
+  {
+    value: "dots",
+    label: "Dots",
+    icon: (
+      <div className="grid grid-cols-3 gap-1">
+        <div className="h-2 w-2 rounded-full bg-current" />
+        <div className="h-2 w-2 rounded-full bg-current" />
+        <div className="h-2 w-2 rounded-full bg-current" />
+        <div className="h-2 w-2 rounded-full bg-current" />
+        <div className="h-2 w-2 rounded-full bg-current" />
+        <div className="h-2 w-2 rounded-full bg-current" />
+        <div className="h-2 w-2 rounded-full bg-current" />
+        <div className="h-2 w-2 rounded-full bg-current" />
+        <div className="h-2 w-2 rounded-full bg-current" />
+      </div>
+    ),
+  },
+  {
+    value: "classy",
+    label: "Classy",
+    icon: (
+      <div className="grid grid-cols-3 gap-1">
+        <div className="relative h-2 w-2 bg-current">
+          <div className="absolute top-0 left-0 h-1 w-1 bg-background" />
+        </div>
+        <div className="h-2 w-2 bg-current" />
+        <div className="relative h-2 w-2 bg-current">
+          <div className="absolute top-0 right-0 h-1 w-1 bg-background" />
+        </div>
+        <div className="h-2 w-2 bg-current" />
+        <div className="h-2 w-2 bg-current" />
+        <div className="h-2 w-2 bg-current" />
+        <div className="relative h-2 w-2 bg-current">
+          <div className="absolute bottom-0 left-0 h-1 w-1 bg-background" />
+        </div>
+        <div className="h-2 w-2 bg-current" />
+        <div className="relative h-2 w-2 bg-current">
+          <div className="absolute right-0 bottom-0 h-1 w-1 bg-background" />
+        </div>
+      </div>
+    ),
+  },
+  {
+    value: "classy-rounded",
+    label: "Classy Rounded",
+    icon: (
+      <div className="grid grid-cols-3 gap-1">
+        <div className="relative h-2 w-2 rounded-sm bg-current">
+          <div className="absolute top-0 left-0 h-1 w-1 rounded-tl-sm bg-background" />
+        </div>
+        <div className="h-2 w-2 rounded-sm bg-current" />
+        <div className="relative h-2 w-2 rounded-sm bg-current">
+          <div className="absolute top-0 right-0 h-1 w-1 rounded-tr-sm bg-background" />
+        </div>
+        <div className="h-2 w-2 rounded-sm bg-current" />
+        <div className="h-2 w-2 rounded-sm bg-current" />
+        <div className="h-2 w-2 rounded-sm bg-current" />
+        <div className="relative h-2 w-2 rounded-sm bg-current">
+          <div className="absolute bottom-0 left-0 h-1 w-1 rounded-bl-sm bg-background" />
+        </div>
+        <div className="h-2 w-2 rounded-sm bg-current" />
+        <div className="relative h-2 w-2 rounded-sm bg-current">
+          <div className="absolute right-0 bottom-0 h-1 w-1 rounded-br-sm bg-background" />
+        </div>
+      </div>
+    ),
+  },
 ];
 
-const CORNER_STYLES: { value: CornerStyle; label: string }[] = [
-  { value: "square", label: "Square" },
-  { value: "rounded", label: "Rounded" },
-  { value: "extra-rounded", label: "Extra Rounded" },
+const CORNER_STYLES: {
+  value: CornerStyle;
+  label: string;
+  icon: ReactNode;
+}[] = [
+  {
+    value: "square",
+    label: "Square",
+    icon: (
+      <div className="relative h-8 w-8 border-2 border-current">
+        <div className="absolute inset-1 border-2 border-current">
+          <div className="h-full w-full bg-current" />
+        </div>
+      </div>
+    ),
+  },
+  {
+    value: "rounded",
+    label: "Rounded",
+    icon: (
+      <div className="relative h-8 w-8 rounded-md border-2 border-current">
+        <div className="absolute inset-1 rounded-sm border-2 border-current">
+          <div className="h-full w-full rounded-sm bg-current" />
+        </div>
+      </div>
+    ),
+  },
+  {
+    value: "extra-rounded",
+    label: "Extra Rounded",
+    icon: (
+      <div className="relative h-8 w-8 rounded-lg border-2 border-current">
+        <div className="absolute inset-1 rounded-md border-2 border-current">
+          <div className="h-full w-full rounded-md bg-current" />
+        </div>
+      </div>
+    ),
+  },
 ];
 
 const ERROR_CORRECTION_LEVELS: {
   value: ErrorCorrectionLevel;
   label: string;
+  description: string;
+  bars: number;
 }[] = [
-  { value: "L", label: "Low" },
-  { value: "M", label: "Medium" },
-  { value: "Q", label: "High" },
-  { value: "H", label: "Highest" },
+  { value: "L", label: "L", description: "7%", bars: 1 },
+  { value: "M", label: "M", description: "15%", bars: 2 },
+  { value: "Q", label: "Q", description: "25%", bars: 3 },
+  { value: "H", label: "H", description: "30%", bars: 4 },
 ];
 
 export function QRCodeForm() {
@@ -53,7 +189,6 @@ export function QRCodeForm() {
     useState<ErrorCorrectionLevel>("M");
   const [size, setSize] = useState(256);
   const [margin, setMargin] = useState(4);
-  const [showAdvanced, setShowAdvanced] = useState(false);
   const [qrCode, setQrCode] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -274,209 +409,216 @@ export function QRCodeForm() {
           </div>
         </div>
 
-        {/* Advanced Settings */}
+        {/* Module Style */}
         <div className="space-y-4">
-          <button
-            className="flex w-full items-center justify-between rounded-2xl border-2 border-border bg-background/50 px-6 py-4 font-medium text-foreground text-sm uppercase tracking-wide backdrop-blur-sm transition-all hover:border-primary hover:bg-background"
-            onClick={() => setShowAdvanced(!showAdvanced)}
-            type="button"
-          >
-            <span className="opacity-60">Advanced Options</span>
-            <motion.svg
-              animate={{ rotate: showAdvanced ? 180 : 0 }}
-              aria-label="Toggle advanced options"
-              className="h-5 w-5 opacity-60"
-              fill="none"
-              role="img"
-              stroke="currentColor"
-              strokeWidth={2}
-              transition={{ duration: 0.3 }}
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 9l-7 7-7-7"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+          <div className="block font-medium text-foreground text-sm uppercase tracking-wide opacity-60">
+            Module Style
+          </div>
+          <div className="grid grid-cols-3 gap-3 sm:grid-cols-5">
+            {MODULE_STYLES.map((style) => (
+              <button
+                className="group relative flex flex-col items-center gap-3 overflow-hidden rounded-2xl border-2 border-border bg-background/50 p-4 shadow-md backdrop-blur-sm transition-all hover:scale-105 hover:shadow-xl active:scale-95"
+                key={style.value}
+                onClick={() => setModuleStyle(style.value)}
+                type="button"
+              >
+                <div className="text-foreground">{style.icon}</div>
+                <span className="font-medium text-foreground text-xs">
+                  {style.label}
+                </span>
+                {moduleStyle === style.value && (
+                  <motion.div
+                    animate={{ scale: 1 }}
+                    className="absolute inset-0 rounded-2xl border-4 border-primary"
+                    initial={{ scale: 0 }}
+                    layoutId="activeModuleStyle"
+                  />
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Corner Style */}
+        <div className="space-y-4">
+          <div className="block font-medium text-foreground text-sm uppercase tracking-wide opacity-60">
+            Corner Style
+          </div>
+          <div className="grid grid-cols-3 gap-3">
+            {CORNER_STYLES.map((style) => (
+              <button
+                className="group relative flex flex-col items-center gap-3 overflow-hidden rounded-2xl border-2 border-border bg-background/50 p-4 shadow-md backdrop-blur-sm transition-all hover:scale-105 hover:shadow-xl active:scale-95"
+                key={style.value}
+                onClick={() => setCornerStyle(style.value)}
+                type="button"
+              >
+                <div className="text-foreground">{style.icon}</div>
+                <span className="font-medium text-foreground text-xs">
+                  {style.label}
+                </span>
+                {cornerStyle === style.value && (
+                  <motion.div
+                    animate={{ scale: 1 }}
+                    className="absolute inset-0 rounded-2xl border-4 border-primary"
+                    initial={{ scale: 0 }}
+                    layoutId="activeCornerStyle"
+                  />
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Error Correction Level */}
+        <div className="space-y-4">
+          <div className="block font-medium text-foreground text-sm uppercase tracking-wide opacity-60">
+            Error Correction
+          </div>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {ERROR_CORRECTION_LEVELS.map((level) => (
+              <button
+                className="group relative flex flex-col items-center gap-3 overflow-hidden rounded-2xl border-2 border-border bg-background/50 p-4 shadow-md backdrop-blur-sm transition-all hover:scale-105 hover:shadow-xl active:scale-95"
+                key={level.value}
+                onClick={() => setErrorCorrectionLevel(level.value)}
+                type="button"
+              >
+                <div className="flex h-8 items-end gap-1">
+                  {Array.from({ length: 4 }).map((_, i) => (
+                    <div
+                      className="w-2 rounded-t transition-all"
+                      key={`${level.value}-${i + 1}`}
+                      style={{
+                        height: `${i < level.bars ? (i + 1) * 25 : 0}%`,
+                        backgroundColor:
+                          i < level.bars
+                            ? "currentColor"
+                            : "var(--color-muted)",
+                      }}
+                    />
+                  ))}
+                </div>
+                <div className="flex flex-col items-center">
+                  <span className="font-bold text-foreground text-sm">
+                    {level.label}
+                  </span>
+                  <span className="text-muted-foreground text-xs">
+                    {level.description}
+                  </span>
+                </div>
+                {errorCorrectionLevel === level.value && (
+                  <motion.div
+                    animate={{ scale: 1 }}
+                    className="absolute inset-0 rounded-2xl border-4 border-primary"
+                    initial={{ scale: 0 }}
+                    layoutId="activeErrorCorrection"
+                  />
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Custom Colors */}
+        <div className="space-y-4">
+          <div className="block font-medium text-foreground text-sm uppercase tracking-wide opacity-60">
+            Custom Colors
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div className="space-y-3">
+              <label
+                className="block font-medium text-foreground text-sm"
+                htmlFor="fg"
+              >
+                Foreground Color
+              </label>
+              <div className="flex gap-3">
+                <input
+                  className="h-14 w-14 cursor-pointer rounded-xl border-2 border-border transition-all hover:scale-105"
+                  id="fg"
+                  onChange={(e) => setForegroundColor(e.target.value)}
+                  type="color"
+                  value={foregroundColor}
+                />
+                <input
+                  className="flex-1 rounded-xl border-2 border-border bg-background px-4 py-2 font-mono text-foreground transition-all focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/20"
+                  onChange={(e) => setForegroundColor(e.target.value)}
+                  pattern="^#[0-9A-Fa-f]{6}$"
+                  type="text"
+                  value={foregroundColor}
+                />
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <label
+                className="block font-medium text-foreground text-sm"
+                htmlFor="bg"
+              >
+                Background Color
+              </label>
+              <div className="flex gap-3">
+                <input
+                  className="h-14 w-14 cursor-pointer rounded-xl border-2 border-border transition-all hover:scale-105"
+                  id="bg"
+                  onChange={(e) => setBackgroundColor(e.target.value)}
+                  type="color"
+                  value={backgroundColor}
+                />
+                <input
+                  className="flex-1 rounded-xl border-2 border-border bg-background px-4 py-2 font-mono text-foreground transition-all focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/20"
+                  onChange={(e) => setBackgroundColor(e.target.value)}
+                  pattern="^#[0-9A-Fa-f]{6}$"
+                  type="text"
+                  value={backgroundColor}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Size & Margin */}
+        <div className="space-y-4">
+          <div className="block font-medium text-foreground text-sm uppercase tracking-wide opacity-60">
+            Size & Margin
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div className="space-y-3">
+              <label
+                className="block font-medium text-foreground text-sm"
+                htmlFor="size"
+              >
+                Size: {size}px
+              </label>
+              <input
+                className="h-3 w-full cursor-pointer appearance-none rounded-full bg-muted accent-primary transition-all hover:bg-muted-foreground/20"
+                id="size"
+                max={512}
+                min={128}
+                onChange={(e) => setSize(Number(e.target.value))}
+                step={32}
+                type="range"
+                value={size}
               />
-            </motion.svg>
-          </button>
+            </div>
 
-          {showAdvanced && (
-            <motion.div
-              animate={{ height: "auto", opacity: 1 }}
-              className="space-y-6 overflow-hidden rounded-2xl border-2 border-border bg-background/50 p-6 backdrop-blur-sm"
-              exit={{ height: 0, opacity: 0 }}
-              initial={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            >
-              {/* Custom Colors */}
-              <div className="grid gap-6 sm:grid-cols-2">
-                <div className="space-y-3">
-                  <label
-                    className="block font-medium text-foreground text-sm"
-                    htmlFor="fg"
-                  >
-                    Foreground Color
-                  </label>
-                  <div className="flex gap-3">
-                    <input
-                      className="h-14 w-14 cursor-pointer rounded-xl border-2 border-border transition-all hover:scale-105"
-                      id="fg"
-                      onChange={(e) => setForegroundColor(e.target.value)}
-                      type="color"
-                      value={foregroundColor}
-                    />
-                    <input
-                      className="flex-1 rounded-xl border-2 border-border bg-background px-4 py-2 font-mono text-foreground transition-all focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/20"
-                      onChange={(e) => setForegroundColor(e.target.value)}
-                      pattern="^#[0-9A-Fa-f]{6}$"
-                      type="text"
-                      value={foregroundColor}
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <label
-                    className="block font-medium text-foreground text-sm"
-                    htmlFor="bg"
-                  >
-                    Background Color
-                  </label>
-                  <div className="flex gap-3">
-                    <input
-                      className="h-14 w-14 cursor-pointer rounded-xl border-2 border-border transition-all hover:scale-105"
-                      id="bg"
-                      onChange={(e) => setBackgroundColor(e.target.value)}
-                      type="color"
-                      value={backgroundColor}
-                    />
-                    <input
-                      className="flex-1 rounded-xl border-2 border-border bg-background px-4 py-2 font-mono text-foreground transition-all focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/20"
-                      onChange={(e) => setBackgroundColor(e.target.value)}
-                      pattern="^#[0-9A-Fa-f]{6}$"
-                      type="text"
-                      value={backgroundColor}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Size & Margin */}
-              <div className="grid gap-6 sm:grid-cols-2">
-                <div className="space-y-3">
-                  <label
-                    className="block font-medium text-foreground text-sm"
-                    htmlFor="size"
-                  >
-                    Size: {size}px
-                  </label>
-                  <input
-                    className="h-3 w-full cursor-pointer appearance-none rounded-full bg-muted accent-primary transition-all hover:bg-muted-foreground/20"
-                    id="size"
-                    max={512}
-                    min={128}
-                    onChange={(e) => setSize(Number(e.target.value))}
-                    step={32}
-                    type="range"
-                    value={size}
-                  />
-                </div>
-
-                <div className="space-y-3">
-                  <label
-                    className="block font-medium text-foreground text-sm"
-                    htmlFor="margin"
-                  >
-                    Margin: {margin}
-                  </label>
-                  <input
-                    className="h-3 w-full cursor-pointer appearance-none rounded-full bg-muted accent-primary transition-all hover:bg-muted-foreground/20"
-                    id="margin"
-                    max={20}
-                    min={0}
-                    onChange={(e) => setMargin(Number(e.target.value))}
-                    type="range"
-                    value={margin}
-                  />
-                </div>
-              </div>
-
-              {/* Styles */}
-              <div className="grid gap-6 sm:grid-cols-3">
-                <div className="space-y-3">
-                  <label
-                    className="block font-medium text-foreground text-sm"
-                    htmlFor="moduleStyle"
-                  >
-                    Module Style
-                  </label>
-                  <select
-                    className="w-full cursor-pointer rounded-xl border-2 border-border bg-background px-4 py-3 text-foreground transition-all hover:border-primary focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/20"
-                    id="moduleStyle"
-                    onChange={(e) =>
-                      setModuleStyle(e.target.value as ModuleStyle)
-                    }
-                    value={moduleStyle}
-                  >
-                    {MODULE_STYLES.map(({ value, label }) => (
-                      <option key={value} value={value}>
-                        {label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="space-y-3">
-                  <label
-                    className="block font-medium text-foreground text-sm"
-                    htmlFor="cornerStyle"
-                  >
-                    Corner Style
-                  </label>
-                  <select
-                    className="w-full cursor-pointer rounded-xl border-2 border-border bg-background px-4 py-3 text-foreground transition-all hover:border-primary focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/20"
-                    id="cornerStyle"
-                    onChange={(e) =>
-                      setCornerStyle(e.target.value as CornerStyle)
-                    }
-                    value={cornerStyle}
-                  >
-                    {CORNER_STYLES.map(({ value, label }) => (
-                      <option key={value} value={value}>
-                        {label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="space-y-3">
-                  <label
-                    className="block font-medium text-foreground text-sm"
-                    htmlFor="errorCorrectionLevel"
-                  >
-                    Error Correction
-                  </label>
-                  <select
-                    className="w-full cursor-pointer rounded-xl border-2 border-border bg-background px-4 py-3 text-foreground transition-all hover:border-primary focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/20"
-                    id="errorCorrectionLevel"
-                    onChange={(e) =>
-                      setErrorCorrectionLevel(
-                        e.target.value as ErrorCorrectionLevel
-                      )
-                    }
-                    value={errorCorrectionLevel}
-                  >
-                    {ERROR_CORRECTION_LEVELS.map(({ value, label }) => (
-                      <option key={value} value={value}>
-                        {label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </motion.div>
-          )}
+            <div className="space-y-3">
+              <label
+                className="block font-medium text-foreground text-sm"
+                htmlFor="margin"
+              >
+                Margin: {margin}
+              </label>
+              <input
+                className="h-3 w-full cursor-pointer appearance-none rounded-full bg-muted accent-primary transition-all hover:bg-muted-foreground/20"
+                id="margin"
+                max={20}
+                min={0}
+                onChange={(e) => setMargin(Number(e.target.value))}
+                type="range"
+                value={margin}
+              />
+            </div>
+          </div>
         </div>
       </motion.div>
     </div>
