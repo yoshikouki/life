@@ -24,6 +24,39 @@ bun install       # 依存関係インストール
 bun update:all    # 全依存関係を最新版に更新
 ```
 
+## Environment Variables
+
+このプロジェクトは Doppler で環境変数を管理しています。
+
+### 基本コマンド
+
+```bash
+# 環境変数一覧の確認
+doppler secrets
+
+# 環境変数の設定
+doppler secrets set KEY_NAME value
+
+# 環境変数付きでコマンド実行（package.json経由で自動実行）
+doppler run -- <command>
+```
+
+### 必要な環境変数
+
+**必須:**
+- `TURSO_DATABASE_URL` - Turso データベース接続URL
+- `TURSO_AUTH_TOKEN` - Turso認証トークン
+- `NEWS_NOTIFICATIONS_VAPID_PUBLIC_KEY` - VAPID公開鍵
+- `NEWS_NOTIFICATIONS_VAPID_PRIVATE_KEY` - VAPID秘密鍵
+- `NEWS_NOTIFICATIONS_SUBJECT` - VAPID subject（mailto:またはURL）
+- `NEWS_NOTIFICATIONS_CRON_SECRET` - Cronエンドポイント保護用トークン
+
+**任意:**
+- `NEWS_NOTIFICATIONS_ICON_URL` - 通知アイコンURL
+- `NEWS_NOTIFICATIONS_BADGE_URL` - 通知バッジURL
+
+詳細は `packages/news/README.md` を参照。
+
 ## Architecture
 
 ### Monorepo Structure (Bun Workspaces)
