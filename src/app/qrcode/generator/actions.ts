@@ -9,6 +9,7 @@ import {
 
 interface QRCodeFormState {
   svg: string | null;
+  size: number | null;
   error: string | null;
 }
 
@@ -19,7 +20,11 @@ export async function generateQRCodeAction(
   const data = formData.get("data");
 
   if (!data || typeof data !== "string" || data.trim() === "") {
-    return { svg: null, error: "Please enter content for the QR code" };
+    return {
+      svg: null,
+      size: null,
+      error: "Please enter content for the QR code",
+    };
   }
 
   const size = Number(formData.get("size")) || 256;
@@ -45,11 +50,12 @@ export async function generateQRCodeAction(
       errorCorrectionLevel,
     });
 
-    return { svg: result.svg, error: null };
+    return { svg: result.svg, size: result.size, error: null };
   } catch (error) {
     console.error("QR Code generation error:", error);
     return {
       svg: null,
+      size: null,
       error: "Failed to generate QR code. Please try again.",
     };
   }

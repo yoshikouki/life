@@ -34,6 +34,7 @@ const ERROR_CORRECTION_LEVELS: {
 
 interface QRCodeFormState {
   svg: string | null;
+  size: number | null;
   error: string | null;
 }
 
@@ -44,7 +45,7 @@ export function QRCodeForm() {
   const [state, formAction, isPending] = useActionState<
     QRCodeFormState,
     FormData
-  >(generateQRCodeAction, { svg: null, error: null });
+  >(generateQRCodeAction, { svg: null, size: null, error: null });
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
@@ -225,12 +226,17 @@ export function QRCodeForm() {
         {state.error && (
           <p className="text-center text-destructive">{state.error}</p>
         )}
-        {state.svg ? (
+        {state.svg && state.size ? (
           <div className="space-y-4">
-            <div
-              className="rounded-lg bg-white p-4 shadow-sm"
-              dangerouslySetInnerHTML={{ __html: state.svg }}
-            />
+            <div className="rounded-lg bg-white p-4 shadow-sm">
+              {/* biome-ignore lint/performance/noImgElement: data URL is not supported by next/image */}
+              <img
+                alt="Generated QR Code"
+                height={state.size}
+                src={`data:image/svg+xml,${encodeURIComponent(state.svg)}`}
+                width={state.size}
+              />
+            </div>
             <DownloadButton svg={state.svg} />
           </div>
         ) : (

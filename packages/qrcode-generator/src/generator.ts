@@ -140,7 +140,11 @@ export async function generateQRCode(
   return { svg, matrix, size };
 }
 
-function getPositionPatternKey(row: number, col: number, size: number): string {
+export function getPositionPatternKey(
+  row: number,
+  col: number,
+  size: number
+): string {
   if (row < 7 && col < 7) {
     return "top-left";
   }
@@ -150,14 +154,14 @@ function getPositionPatternKey(row: number, col: number, size: number): string {
   return "bottom-left";
 }
 
-function getPatternStartRow(row: number, size: number): number {
+export function getPatternStartRow(row: number, size: number): number {
   if (row < 7) {
     return 0;
   }
   return size - 7;
 }
 
-function getPatternStartCol(col: number, size: number): number {
+export function getPatternStartCol(col: number, size: number): number {
   if (col < 7) {
     return 0;
   }

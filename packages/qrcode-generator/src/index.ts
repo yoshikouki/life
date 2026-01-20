@@ -1,4 +1,6 @@
 export { generateQRCode, generateQRMatrix } from "./generator";
+export type { QRCodeSVGProps } from "./svg-renderer";
+export { createQRCodeElement } from "./svg-renderer";
 export type {
   CornerStyle,
   ErrorCorrectionLevel,

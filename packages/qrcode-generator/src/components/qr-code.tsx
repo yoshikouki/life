@@ -1,4 +1,4 @@
-import { generateQRCode } from "../generator";
+import { createQRCodeElement } from "../svg-renderer";
 import type { QRCodeOptions } from "../types";
 
 export interface QRCodeProps extends Omit<QRCodeOptions, "data"> {
@@ -17,7 +17,7 @@ export async function QRCode({
   cornerStyle = "square",
   className,
 }: QRCodeProps) {
-  const result = await generateQRCode({
+  return await createQRCodeElement({
     data: value,
     size,
     margin,
@@ -26,18 +26,6 @@ export async function QRCode({
     backgroundColor,
     moduleStyle,
     cornerStyle,
+    className,
   });
-
-  return (
-    <div
-      className={className}
-      dangerouslySetInnerHTML={{ __html: result.svg }}
-      style={
-        {
-          "--qr-bg": backgroundColor,
-          display: "inline-block",
-        } as React.CSSProperties
-      }
-    />
-  );
 }
