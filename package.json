@@ -7,8 +7,8 @@
   ],
   "scripts": {
     "dev": "doppler run -- bun --bun x next dev --turbo",
-    "build": "doppler run -- bun --bun x next build",
-    "start": "doppler run -- bun --bun x next start",
+    "build": "bun --bun x next build",
+    "start": "bun --bun x next start",
     "test": "vitest",
     "test:run": "vitest run",
     "lint": "bunx ultracite check",
